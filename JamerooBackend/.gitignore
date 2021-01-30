@@ -106,3 +106,10 @@ dist
 # TypeScript
 *.map
 *.js
+bin/
+obj/
+
+#jameroo
+public/game/
+.vs/
+*.suo

@@ -1,5 +1,5 @@
 {
-  "ServiceSkeletonPort": {
+  "JamerooBackendPort": {
     "type": "TCP",
     "Port": 10999
   }
