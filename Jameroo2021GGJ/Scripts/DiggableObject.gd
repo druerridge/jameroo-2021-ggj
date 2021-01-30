@@ -11,7 +11,7 @@ signal interacted(sender, item)
 var item
 
 func _ready():
-	$Pivot/Sprite.visible = false
+	#$Pivot/Sprite.visible = false
 	if not itemDirectory == null:
 		item = itemDirectory.new()
 
