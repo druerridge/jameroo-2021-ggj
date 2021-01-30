@@ -10,3 +10,35 @@ export interface Graylog2 {
 	graylog: any;
     staticMeta: any;
 }
+
+export interface Marking {
+    shape: string;
+    color: string;
+}
+
+export interface Item {
+    name: string;
+    color: string;
+}
+
+export interface DigResult {
+    items: Array<Item>;
+}
+
+export interface Cell {
+    marking: Marking;
+    digResultByColor: { [key: string]: DigResult };
+}
+
+export interface Room {
+    grid: Array<Array<Cell>>;
+    depositBox: Array<Item>;
+}
+
+export interface CreateRoomStateResponse {
+    roomId: string;
+}
+
+export interface GetRoomResponse {
+    room: Room;
+}
