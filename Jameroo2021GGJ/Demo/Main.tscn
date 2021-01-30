@@ -50,6 +50,10 @@ position = Vector2( 168, 24 )
 position = Vector2( 16, 16 )
 itemDirectory = ExtResource( 9 )
 
+[node name="Key2" parent="InteractiveTerrain" instance=ExtResource( 8 )]
+position = Vector2( 16, 16 )
+itemDirectory = ExtResource( 9 )
+
 [node name="AlwaysOnTop" type="TileMap" parent="."]
 z_index = 4096
 tile_set = ExtResource( 2 )

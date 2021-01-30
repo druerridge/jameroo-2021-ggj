@@ -7,7 +7,6 @@ func _init():
 	self.i_description = "You need these to beat the game!"
 	self.i_stackable = false
 
-
 func i_use(player):
 	player.health -= 10
 	.i_use(player)

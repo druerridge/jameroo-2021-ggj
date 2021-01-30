@@ -4,14 +4,19 @@ enum CELL_TYPES {EMPTY = -1, ACTOR, OBJECT, DIGGABLE}
 
 var children
 var stale_children = false
-var rng
+var rng = RandomNumberGenerator.new()
 
 func _ready():
-	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	process_actor_spawn_conditions()
 	refresh_children()
 	randomize_diggable_positions()
+	var diggableObjects = get_tree().get_nodes_in_group("Diggable")
+	for obj in diggableObjects:
+		obj.connect("interacted", self, "_on_item_interacted")
+		
+func _process(delta):
+	check_if_won()
 
 # Make sure to call this when necessary
 # We don't want to be getting children everytime an actor tries to move.
@@ -79,6 +84,11 @@ func update_overworld_obj_position(requesting_object, cell_start, cell_target):
 # but we want the overworld to immediately know this cell is no longer occupied
 func remove_from_active(obj):
 	children.erase(obj)
+	
+func check_if_won():
+	if get_tree().get_nodes_in_group("Key").size() <= 0:
+		#root.remove_child()
+		pass
 
 func randomize_diggable_positions():
 	var diggableObjects = get_tree().get_nodes_in_group("Diggable")
@@ -86,7 +96,6 @@ func randomize_diggable_positions():
 		var desiredGridPosition = Vector2(rng.randi_range(0, cell_size.x), rng.randi_range(0, cell_size.y))
 		var generatedPosition = map_to_world(desiredGridPosition) + cell_size / 2
 		obj.position = generatedPosition
-		print("Key Location: ",desiredGridPosition)
 
 # By default design, all potential actors are on scene, and those that do not
 # meet their conditions to be present are removed

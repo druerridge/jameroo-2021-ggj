@@ -5,6 +5,7 @@
 
 [node name="Key" type="Node2D" groups=[
 "Diggable",
+"Key",
 ]]
 script = ExtResource( 1 )
 obj_type = 2

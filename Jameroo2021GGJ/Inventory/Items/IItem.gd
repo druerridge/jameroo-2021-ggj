@@ -9,6 +9,7 @@ var i_consumable := true
 var i_stackable := true
 var i_maxstack := 5
 
-
 func i_use(_player):
 	print("I was used ", self.i_name)
+func i_pickup(_player):
+	print(self.i_name, " picked up")

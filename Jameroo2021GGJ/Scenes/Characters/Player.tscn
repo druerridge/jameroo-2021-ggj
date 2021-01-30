@@ -82,7 +82,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-gui_path = NodePath("Pivot/GUI")
+gui_path = NodePath("Pivot/CanvasLayer/GUI")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bump = SubResource( 1 )
@@ -106,13 +106,15 @@ hframes = 4
 current = true
 zoom = Vector2( 0.2, 0.2 )
 
-[node name="GUI" type="Control" parent="Pivot"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Pivot"]
+
+[node name="GUI" type="Control" parent="Pivot/CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -94.0
-margin_top = 10.0
-margin_right = 94.0
-margin_bottom = 53.0
+margin_left = 19.0
+margin_top = 458.0
+margin_right = -16.0
+margin_bottom = -13.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

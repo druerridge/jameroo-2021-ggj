@@ -15,7 +15,7 @@ func _ready():
 	if not itemDirectory == null:
 		item = itemDirectory.new()
 
-
 func interact():
-	emit_signal("interacted", self, item if $Pivot/Sprite.visible == true else null)
+	if($Pivot/Sprite.visible == true):
+		emit_signal("interacted", self, item)
 	$Pivot/Sprite.visible = true
