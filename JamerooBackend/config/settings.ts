@@ -23,7 +23,7 @@ let defaultSettings: I.Settings = {
 				host: "analytics.beta.maestrosgame.com",
 				port: 12201
 			}],
-			facility: "ServiceSkeleton",
+			facility: "JamerooBackend",
 		},
         staticMeta: { shard: 'local' }
     },

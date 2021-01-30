@@ -1,5 +1,5 @@
 {
-  "name": "ServiceSkeleton",
+  "name": "JamerooBackend",
   "version": "0.0.0",
   "dependencies": {
     "@types/caseless": {

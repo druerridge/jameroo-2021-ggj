@@ -6,6 +6,7 @@ import http = require('http');
 import path = require('path');
 import I = require('./Interfaces');
 let logger = require('./logger');	
+import serveStatic = require('serve-static');
 
 let settings: I.Settings = require('./config/settings');
 
@@ -24,6 +25,7 @@ let jsonFormatter = function (tokens: any, req: any, res: any) {
     return JSON.stringify(obj);
 }
 app.use(morgan(jsonFormatter, { stream: logger.stream }));
+app.use(serveStatic(path.join(__dirname, 'public')));
 
 app.get('/isRunning', (req:any, res:any) => {
     res.json(200, true);
@@ -37,6 +39,6 @@ process.on('uncaughtException', function (err: any) {
 	debugger;
 });
 
-logger.info("ServiceSkeleton has started");
+logger.info("JamerooBackend has started");
 let printableSettings: any = settings;
 logger.info(JSON.stringify(printableSettings.__proto__, null, 2));
