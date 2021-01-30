@@ -1,0 +1,6 @@
+{
+  "ServiceSkeletonPort": {
+    "type": "TCP",
+    "Port": 10999
+  }
+}
