@@ -25,8 +25,6 @@ func attempt_dig():
 	overworld.request_interaction(self, Vector2.ZERO)
 	
 func _on_item_interacted(sender, item):
-	print("here")
-	print(item)
 	if $InventoryComponent.add_to_inventory(item, 1):
-		print("added to inventory")
+
 		sender.queue_free()
