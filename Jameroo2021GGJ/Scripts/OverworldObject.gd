@@ -2,12 +2,14 @@ extends Node2D
 
 onready var overworld = get_parent()
 
-enum CELL_TYPES { ACTOR, OBJECT }
+enum CELL_TYPES { ACTOR, OBJECT, DIGGABLE }
 export(CELL_TYPES) var obj_type = CELL_TYPES.OBJECT
 
 func do_what_this_object_does():
-    print(name, " is an OverworldObject that doesn't do anything.")
-
+	print(name, " is an OverworldObject that doesn't do anything.")
+	
+func interact():
+	print("Default, please override me")
 
 # An object can specify its condition for being preent in the scene by defining
 # this method. By default, if an actor is present in the editor, it will be

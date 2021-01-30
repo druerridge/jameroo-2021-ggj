@@ -1,6 +1,6 @@
 extends TileMap
 
-enum CELL_TYPES {EMPTY = -1, ACTOR, OBJECT}
+enum CELL_TYPES {EMPTY = -1, ACTOR, OBJECT, DIGGABLE}
 
 var children
 var stale_children = false
@@ -39,7 +39,7 @@ func request_interaction(requesting_object, direction):
 	var cell_obj = get_overworld_obj(cell_target)
 	if !cell_obj:
 		return
-	if cell_obj.obj_type != CELL_TYPES.ACTOR:
+	if cell_obj.obj_type != CELL_TYPES.ACTOR && cell_obj.obj_type != CELL_TYPES.DIGGABLE:
 		return
 	cell_obj.interact()
 
@@ -56,6 +56,9 @@ func request_move(requesting_object, direction):
 				cell_obj.do_what_this_object_does()
 				return update_overworld_obj_position(requesting_object,
 						cell_start, cell_target)
+			if cell_obj.obj_type == CELL_TYPES.DIGGABLE:
+				return update_overworld_obj_position(requesting_object,
+						cell_start, cell_target) 
 		else:
 			return update_overworld_obj_position(requesting_object,
 					cell_start, cell_target)

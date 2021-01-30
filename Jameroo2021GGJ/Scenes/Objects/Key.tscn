@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/DiggableObject.gd" type="Script" id=1]
+[ext_resource path="res://Inventory/Items/Staff.png" type="Texture" id=2]
+
+[node name="Key" type="Node2D"]
+script = ExtResource( 1 )
+obj_type = 2
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+texture = ExtResource( 2 )

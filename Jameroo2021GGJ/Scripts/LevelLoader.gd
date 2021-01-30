@@ -16,10 +16,11 @@ func instantiate_player():
 	if not spawn_points[index]:
 		index = 0
 
-
 	# Spawn the player and add to scene
 	var player_spawn = load(player).instance()
 	$InteractiveTerrain.add_child(player_spawn)
+	print(player_spawn)
+	$InteractiveTerrain/Key.connect("interacted", player_spawn, "_on_item_interacted")
 	# Set player at the correct position (spawn point of zone)
 	player_spawn.position = spawn_points[index].position
 	# Make the player face the direction from last movement to create a
