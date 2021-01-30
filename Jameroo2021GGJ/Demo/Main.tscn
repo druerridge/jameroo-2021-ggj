@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/LevelLoader.gd" type="Script" id=1]
 [ext_resource path="res://Demo/demo_tiles.tres" type="TileSet" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://Demo/introtext.png" type="Texture" id=7]
 [ext_resource path="res://Scenes/Objects/Key.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Inventory/Items/Item_Key.gd" type="Script" id=9]
-[ext_resource path="res://Demo/HTTPCanvasLayer.gd" type="Script" id=10]
 [ext_resource path="res://Demo/HTTPControl.gd" type="Script" id=11]
 
 [node name="LevelBase" type="Node2D"]
@@ -68,10 +67,6 @@ position = Vector2( -48, 16 )
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 7 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 2
-script = ExtResource( 10 )
-
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -109,4 +104,3 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="Control/Button" to="Control" method="_on_Button_pressed"]
-[connection signal="request_completed" from="Control/HTTPRequest" to="CanvasLayer" method="_on_HTTPRequest_request_completed"]
