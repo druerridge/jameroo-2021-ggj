@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Demo/character.png" type="Texture" id=2]
 [ext_resource path="res://Inventory/UI/InventoryWindow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Inventory/InventoryComponent.gd" type="Script" id=4]
+[ext_resource path="res://Sprites/light-mask.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/shade-light-mask.png" type="Texture" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bump"
@@ -77,6 +79,7 @@ tracks/0/keys = {
 "Player",
 "actors",
 ]]
+light_mask = -2147483647
 position = Vector2( 8, 8 )
 script = ExtResource( 1 )
 __meta__ = {
@@ -118,5 +121,17 @@ margin_bottom = -13.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ShadeLight2D" type="Light2D" parent="Pivot"]
+scale = Vector2( 100, 100 )
+z_index = 100
+texture = ExtResource( 6 )
+color = Color( 0, 0, 0, 1 )
+mode = 3
+
+[node name="VisibleLight2D" type="Light2D" parent="Pivot"]
+scale = Vector2( 0.5, 0.5 )
+z_index = 101
+texture = ExtResource( 5 )
 
 [node name="Tween" type="Tween" parent="."]
