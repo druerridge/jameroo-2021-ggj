@@ -9,6 +9,7 @@ let logger = require('./logger');
 import serveStatic = require('serve-static');
 
 let settings: I.Settings = require('./config/settings');
+let PresetData = require('./PresetData');
 
 let bodyParser = require('body-parser');
 
@@ -27,96 +28,9 @@ let jsonFormatter = function (tokens: any, req: any, res: any) {
 app.use(morgan(jsonFormatter, { stream: logger.stream }));
 app.use(serveStatic(path.join(__dirname, 'public')));
 
-let COLOR1: string = "color1";
-let COLOR2: string = "color2";
-let COLOR3: string = "color3";
-let NOCOLOR: string = "nocolor";
-
-let SHAPE1: string = "shape1";
-let SHAPE2: string = "shape2";
-let SHAPE3: string = "shape3";
-let NOSHAPE: string = "noshape";
-
-let BEER_NAME: string = "beer";
-let REDBULL_NAME: string = "redbull";
-let KEY_NAME: string = "key";
-let SHOVEL_NAME: string = "shovel";
-
-let beerItem: I.Item = {
-    name: BEER_NAME,
-    color: NOCOLOR
-};
-
-let color2Shovel: I.Item = {
-    name: SHOVEL_NAME,
-    color: COLOR2
-};
-
-let color3Shovel: I.Item = {
-    name: SHOVEL_NAME,
-    color: COLOR3
-};
-
-let keyItem: I.Item = {
-    name: KEY_NAME,
-    color: NOCOLOR
-};
-
-let redbullItem: I.Item = {
-    name: REDBULL_NAME,
-    color: NOCOLOR
-};
-
-let NOMARKING: I.Marking = {
-    shape: NOSHAPE,
-    color: NOCOLOR
-};
-
-let cell00: I.Cell = {
-    digResultByColor: {
-        color1: { items: [redbullItem] },
-        color2: { items: [redbullItem] },
-        color3: { items: [redbullItem] }
-    },
-    marking: NOMARKING
-};
-
-let cell01: I.Cell = {
-    digResultByColor: {
-        color1: { items: [color2Shovel] },
-        color2: { items: [color3Shovel] },
-        color3: { items: [keyItem] }
-    },
-    marking: NOMARKING
-};
-
-let cell10: I.Cell = {
-    digResultByColor: {
-        color1: { items: [beerItem] },
-        color2: { items: [beerItem] },
-        color3: { items: [beerItem] }
-    },
-    marking: NOMARKING
-};
-
-let cell11: I.Cell = {
-    digResultByColor: {
-        color1: { items: [] },
-        color2: { items: [] },
-        color3: { items: [] }
-    },
-    marking: NOMARKING
-};
-
-let room22: I.Room = {
-    grid: [
-        [cell00, cell01],
-        [cell10, cell11]
-    ],
-    depositBox: []
-}
 let roomByRoomId: { [key: string]: I.Room } = {
-    room22: room22
+    room22: PresetData.generateRoom22(),
+    room33: PresetData.generateRoom33()
 }
 
 function generateRoomId(): string {

@@ -3,9 +3,9 @@ extends Control
 signal room_data_loaded(room_data)
 
 var get_room_base_url = "UNDEFINED YO"
-var base_url := "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
+var base_url = "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
 #var base_url = "http://localhost:10999/" # for testing with a local backend
-var room_id := "room22"
+var room_id = "room33"
 var room_data
 
 func _ready():
@@ -40,10 +40,10 @@ func js_initialize():
 		print("search: " + temp_search)
 		print("href: " + temp_href)
 		print("port: " + temp_port)
-		print("temp_room_id: " + temp_room_id)
-		
 		base_url = temp_href.rstrip(temp_search)
+
 		if (temp_room_id != null or temp_room_id != ""):
+			print("temp_room_id: " + temp_room_id)
 			room_id = temp_room_id
 	else:
 		print("The JavaScript singleton is NOT available")
