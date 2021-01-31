@@ -2,7 +2,9 @@ extends "res://Scripts/Actor.gd"
 
 export(NodePath) var gui_path = "GUI"
 onready var gui = get_node(gui_path)
-onready var shovelOptionsArea = $Pivot/CanvasLayer/ShovelsUI/ShovelOptions
+export(NodePath) var shovel_gui_path = "Shovel_GUI"
+onready var shovel_gui = get_node(shovel_gui_path)
+#onready var shovelOptionsArea = $Pivot/CanvasLayer/ShovelsUI/ShovelOptions
 
 var drunkTimer = 0
 
@@ -11,10 +13,10 @@ func _ready():
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_shovel"):
-		shovelOptionsArea.visible = not shovelOptionsArea.visible
-	obj_color = shovelOptionsArea.currentSelection + 1
-	if shovelOptionsArea.visible:
-		return
+		$ShovelInvComponent.toggle_window(self)
+	#obj_color = shovelOptionsArea.currentSelection + 1
+	#if shovelOptionsArea.visible:
+		#return
 	
 	if drunkTimer > 0:
 		drunkTimer -= delta
@@ -42,7 +44,13 @@ func activate_object():
 func _on_item_interacted(sender, item):
 	if not correct_shovel_color(sender):
 		return
-	if $InventoryComponent.add_to_inventory(item, 1):
+	print (item.i_name)
+	if item.i_name == "Shovel": 
+		print("is a shovel")
+		if $ShovelInvComponent.add_to_inventory(item, 1):
+			sender.queue_free()
+			overworld.remove_from_active(sender)
+	elif $InventoryComponent.add_to_inventory(item, 1):
 		sender.queue_free()
 		overworld.remove_from_active(sender)
 		overworld.check_if_won()
@@ -57,3 +65,7 @@ func start_dig():
 	var should_dig = yield()
 	if should_dig:
 		attempt_dig()
+func get_gui(caller):
+	if "Shovel" in caller:
+		return shovel_gui
+	return gui

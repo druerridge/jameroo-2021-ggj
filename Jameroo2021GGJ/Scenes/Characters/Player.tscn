@@ -5,7 +5,7 @@
 [ext_resource path="res://Inventory/UI/InventoryWindow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Inventory/InventoryComponent.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/light-mask.png" type="Texture" id=5]
-[ext_resource path="res://Scenes/UI/Shovels.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Inventory/UI/ShovelInventoryWindow.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bump"
@@ -86,6 +86,7 @@ __meta__ = {
 "_edit_group_": true
 }
 gui_path = NodePath("Pivot/CanvasLayer/GUI")
+shovel_gui_path = NodePath("Pivot/CanvasLayer/ShovelsUI")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bump = SubResource( 1 )
@@ -96,6 +97,11 @@ anims/walk_up = SubResource( 4 )
 [node name="InventoryComponent" type="Node" parent="."]
 script = ExtResource( 4 )
 window_scene = ExtResource( 3 )
+
+[node name="ShovelInvComponent" type="Node" parent="."]
+script = ExtResource( 4 )
+inv_slots = 3
+window_scene = ExtResource( 6 )
 
 [node name="Pivot" type="Position2D" parent="."]
 
@@ -137,8 +143,5 @@ anchor_bottom = 0.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ShovelOptions" parent="Pivot/CanvasLayer/ShovelsUI" instance=ExtResource( 7 )]
-visible = false
 
 [node name="Tween" type="Tween" parent="."]

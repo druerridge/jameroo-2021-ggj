@@ -137,7 +137,7 @@ func toggle_window(player):
 		interactor = player
 		var new_window = window_scene.instance()
 		new_window.inv_comp = self
-		interactor.gui.add_child(new_window)
+		interactor.get_gui(self.name).add_child(new_window)
 		window_ref = new_window
 	else:
 		window_ref.queue_free()

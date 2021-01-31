@@ -4,6 +4,7 @@ extends MarginContainer
 var slot_index := 0
 var item_struct: IItem
 var stack_amount := 0
+var component_parent
 
 onready var inv_comp = get_node("../../../").inv_comp
 onready var ui_stackamount: Label = get_node("Background/Overlay/StackAmount")
@@ -13,6 +14,8 @@ onready var ui_image: TextureRect = get_node("Background/Overlay/Image")
 func _ready():
 	refresh_slot()
 
+func set_component_parent(parent):
+	component_parent = parent
 
 func refresh_slot():
 	item_struct = inv_comp.inv_struct_list[slot_index]
@@ -44,7 +47,8 @@ func _on_gui_input_signal(event):
 		# not event.pressed means released
 		if event.button_index == BUTTON_RIGHT and not event.pressed:
 			if inv_comp.inv_struct_list[slot_index] != null:
-				var interactor_inv_comp = inv_comp.interactor.get_node("InventoryComponent")
+				var interactor_inv_comp = inv_comp.interactor.get_node(component_parent)
+				print(component_parent)
 				
 				if inv_comp == interactor_inv_comp:
 					inv_comp.use_item_at_slot(slot_index)

@@ -34,7 +34,7 @@ func get_overworld_obj(coordinates):
 			stale_children = true
 			continue
 		else:
-			if world_to_map(node.position) == coordinates && node.name != "Player":
+			if world_to_map(node.position) == coordinates && node.obj_type == CELL_TYPES.DIGGABLE:
 				return(node)
 	if stale_children:
 		stale_children = false
@@ -63,13 +63,8 @@ func request_move(requesting_object, direction):
 	var cell_target_type = get_cellv(cell_target)
 	if cell_target_type == CELL_TYPES.EMPTY:
 		var cell_obj = get_overworld_obj(cell_target)
-		if cell_obj:
-			if cell_obj.obj_type == CELL_TYPES.DIGGABLE:
-				return update_overworld_obj_position(requesting_object,
-						cell_start, cell_target) 
-		else:
-			return update_overworld_obj_position(requesting_object,
-					cell_start, cell_target)
+		return update_overworld_obj_position(requesting_object,
+				cell_start, cell_target)
 
 func update_overworld_obj_position(requesting_object, cell_start, cell_target):
 	# The cell the moving object was in is now free

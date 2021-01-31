@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Inventory/UI/InventoryWindow.gd" type="Script" id=1]
+[ext_resource path="res://Inventory/UI/ItemSlot.tscn" type="PackedScene" id=2]
+
+[node name="ShovelInventoryWindow" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+slot_scene = ExtResource( 2 )
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 50, 50 )
+color = Color( 0.5, 0.5, 0.5, 0.7 )
+
+[node name="UpperOverlay" type="Control" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryName" type="Label" parent="Background/UpperOverlay"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -59.8339
+margin_top = 6.26929
+margin_right = 43.1661
+margin_bottom = 20.2693
+grow_horizontal = 2
+text = "Inventory Name"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="Background/UpperOverlay"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -17.0856
+margin_top = 5.48306
+margin_right = 2.91443
+margin_bottom = 25.4831
+grow_horizontal = 0
+rect_scale = Vector2( 0.5, 0.5 )
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+enabled_focus_mode = 0
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventoryGrid" type="GridContainer" parent="Background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 25.0
+margin_right = -27.0
+margin_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Background/UpperOverlay/CloseButton" to="." method="_on_CloseButton_pressed"]
