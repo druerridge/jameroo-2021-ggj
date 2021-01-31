@@ -1,11 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Demo/character-big.png" type="Texture" id=2]
 [ext_resource path="res://Inventory/UI/InventoryWindow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Inventory/InventoryComponent.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/light-mask.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/shade-light-mask.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/UI/Shovels.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Animation" id=1]
@@ -110,13 +109,6 @@ hframes = 4
 [node name="PlayerCamera" type="Camera2D" parent="Pivot"]
 current = true
 zoom = Vector2( 0.8, 0.8 )
-
-[node name="ShadeLight2D" type="Light2D" parent="Pivot"]
-scale = Vector2( 100, 100 )
-z_index = 100
-texture = ExtResource( 6 )
-color = Color( 0, 0, 0, 1 )
-mode = 3
 
 [node name="VisibleLight2D" type="Light2D" parent="Pivot"]
 scale = Vector2( 1.1, 1.1 )
