@@ -13,7 +13,7 @@ func _ready():
 		slot_child.slot_index = i
 		$Background/InventoryGrid.add_child(slot_child)
 		slot_list.append(slot_child)
-		slot_child.set_component_parent(inv_comp)
+		slot_child.set_component_parent(inv_comp.name)
 	$Background/UpperOverlay/InventoryName.text = inv_comp.inv_name
 
 
