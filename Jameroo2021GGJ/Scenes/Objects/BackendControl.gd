@@ -1,10 +1,12 @@
 extends Control
 
+signal room_data_loaded(room_data)
+
 var get_room_base_url = "UNDEFINED YO"
-var base_url = "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
+var base_url := "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
 #var base_url = "http://localhost:10999/" # for testing with a local backend
-var room_id = "room22"
-var room_data = {}
+var room_id := "room22"
+var room_data
 
 func _ready():
 	initialize()
@@ -99,10 +101,11 @@ func _on_get_room_completed(result, response_code, headers, body):
 		$RoomDataRichTextLabel.text = "error on http request complete"
 		
 	var jsonString = body.get_string_from_utf8();
-	var json = JSON.parse(jsonString)
+	var json := JSON.parse(jsonString)
 	room_data = json.result
 	print(json.result)
 	$RoomDataRichTextLabel.text = jsonString
+	emit_signal("room_data_loaded", room_data)
 
 func _on_GetRoomButton_pressed():
 	get_room($RoomIdTextEdit.text);

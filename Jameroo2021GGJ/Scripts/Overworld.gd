@@ -5,6 +5,7 @@ enum CELL_TYPES {EMPTY = -1, ACTOR, OBJECT, DIGGABLE}
 var children
 var stale_children = false
 var rng = RandomNumberGenerator.new()
+var room_data
 
 func _ready():
 	print(CELL_TYPES)
@@ -104,3 +105,21 @@ func process_actor_spawn_conditions():
 	for obj in get_children():
 		if !obj.spawn_condition():
 			obj.call_deferred("free")
+
+func empty(marking):
+	return marking.shape == "noshape" && marking.color == "nocolor"
+
+func load_room(in_room_data):
+	print("loading room data")
+	room_data = in_room_data;
+	print(JSON.print(room_data.room.grid[0][1], "  ")) # how to access a cell
+#	TODO: set up markings
+#	for row in room_data.room.grid:
+#		for cell in row:
+#			if !empty(cell.marking):
+#				Marking.new()
+#	add_child()
+
+func _on_BackendControl_room_data_loaded(room_data):
+	load_room(room_data)
+	pass # Replace with function body.
