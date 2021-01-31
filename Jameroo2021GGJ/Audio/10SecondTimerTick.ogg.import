@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/10SecondTimerTick.ogg-f324f01052b36808d4b1fda0947891f9.oggstr"
+
+[deps]
+
+source_file="res://Audio/10SecondTimerTick.ogg"
+dest_files=[ "res://.import/10SecondTimerTick.ogg-f324f01052b36808d4b1fda0947891f9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

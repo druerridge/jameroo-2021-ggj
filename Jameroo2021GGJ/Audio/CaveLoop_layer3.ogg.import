@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/CaveLoop_layer3.ogg-9ebc16864bea201b2bed9c65a2b6195d.oggstr"
+
+[deps]
+
+source_file="res://Audio/CaveLoop_layer3.ogg"
+dest_files=[ "res://.import/CaveLoop_layer3.ogg-9ebc16864bea201b2bed9c65a2b6195d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
