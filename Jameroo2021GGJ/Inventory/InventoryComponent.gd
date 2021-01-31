@@ -109,7 +109,6 @@ func add_starting_items():
 		else:
 			add_to_inventory(item, start_items_amount[i])
 
-
 func inv_query(item_name: String, item_amount: int) -> bool:
 	var total: int = 0
 	for i in range(inv_struct_list.size()):

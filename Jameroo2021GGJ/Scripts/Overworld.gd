@@ -49,6 +49,7 @@ func request_interaction(requesting_object, direction):
 	var cell_start = world_to_map(requesting_object.position)
 	var cell_target = world_to_map(requesting_object.position) + direction
 	var cell_obj = get_overworld_obj(cell_target)
+	dig_at_grid_pos(requesting_object, cell_target)
 	if !cell_obj:
 		return
 	if cell_obj.obj_type != CELL_TYPES.ACTOR && cell_obj.obj_type != CELL_TYPES.DIGGABLE:
@@ -60,7 +61,6 @@ func request_move(requesting_object, direction):
 	var cell_start = world_to_map(requesting_object.position)
 	var cell_target = world_to_map(requesting_object.position) + direction
 	var cell_target_type = get_cellv(cell_target)
-
 	if cell_target_type == CELL_TYPES.EMPTY:
 		var cell_obj = get_overworld_obj(cell_target)
 		if cell_obj:
@@ -122,10 +122,17 @@ func load_markings(in_room_data):
 			add_child(marking)
 			print("marking added" + marking.color + marking.shape)
 
+func dig_at_grid_pos(requesting_object, grid_pos):
+	var output = JSON.parse(JSON.print(room_data.room.grid[0][1], " "))
+	var colorResult = output.result.digResultByColor.color1
+	var stringName = "Beer"
+	#var newItem = load("res://Scenes/Objects/" +stringName+".tscn").load()
+
+
 func load_room(in_room_data):
-	print("loading room data")
+	#print("loading room data")
 	room_data = in_room_data;
-	print(JSON.print(room_data.room.grid[0][1], "  "))
+	#print(JSON.print(room_data.room.grid[0][1], "  "))
 	load_markings(in_room_data)
 
 func _on_BackendControl_room_data_loaded(room_data):

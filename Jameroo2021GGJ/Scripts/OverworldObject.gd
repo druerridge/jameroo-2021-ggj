@@ -3,7 +3,7 @@ extends Node2D
 onready var overworld = get_parent()
 
 enum CELL_TYPES { ACTOR, OBJECT, DIGGABLE }
-enum CELL_COLORS {NONE, RED, BLUE, YELLOW}
+enum CELL_COLORS {NONE, Color1, Color2, Color3}
 export(CELL_TYPES) var obj_type = CELL_TYPES.OBJECT
 export (CELL_COLORS) var obj_color = CELL_COLORS.NONE
 

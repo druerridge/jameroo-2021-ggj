@@ -5,9 +5,7 @@ var numberOfOptions = 3
 
 func _ready():
 	shovelOptions = $ShovelOptions
-	shovelOptions.add_item("red", load("res://Inventory/Items/Bomb.png"))
-	shovelOptions.add_item("blue", load("res://Inventory/Items/Bomb.png"))
-	shovelOptions.add_item("yellow", load("res://Inventory/Items/Bomb.png"))
+	shovelOptions.add_item("Color1", load("res://Inventory/Items/Bomb.png"))
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):

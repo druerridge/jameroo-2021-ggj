@@ -12,5 +12,4 @@ func i_pickup(player):
 	InputSystem.randomize_movement_inputs()
 	
 func i_use(player):
-	player.health += 10
 	.i_use(player)

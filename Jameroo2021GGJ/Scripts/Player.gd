@@ -2,24 +2,17 @@ extends "res://Scripts/Actor.gd"
 
 export(NodePath) var gui_path = "GUI"
 onready var gui = get_node(gui_path)
-onready var shovelOptionsArea = $Pivot/CanvasLayer/ShovelOptionsUI/ShovelOptions
-
-# every attempt dig will change or add the dug sprite
-# inputs H, J, K will select a color to dig
-# Shift digs, using the color
-# Y, U, I will select a shape that will be used
-# space will place
-# we might want to talk about the UX of doing these things
+onready var shovelOptionsArea = $Pivot/CanvasLayer/ShovelsUI/ShovelOptions
 
 var drunkTimer = 0
 
 func _ready():
-	obj_color = CELL_COLORS.RED
+	obj_color = 1
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_shovel"):
 		shovelOptionsArea.visible = not shovelOptionsArea.visible
-	obj_color = shovelOptionsArea.items[shovelOptionsArea.currentSelection]
+	obj_color = shovelOptionsArea.currentSelection + 1
 	if shovelOptionsArea.visible:
 		return
 	
