@@ -7,6 +7,8 @@ var stale_children = false
 var rng = RandomNumberGenerator.new()
 var room_data
 
+const marking_template = preload("res://Scenes/Objects/Marking.tscn")
+
 func _ready():
 	print(CELL_TYPES)
 	rng.randomize()
@@ -106,20 +108,25 @@ func process_actor_spawn_conditions():
 		if !obj.spawn_condition():
 			obj.call_deferred("free")
 
-func empty(marking):
-	return marking.shape == "noshape" && marking.color == "nocolor"
+func load_markings(in_room_data):
+	for row_index in range(0, in_room_data.room.grid.size()):
+		for column_index in range(0, in_room_data.room.grid[row_index].size()):
+			var cell = in_room_data.room.grid[row_index][column_index]
+			var marking = marking_template.instance()
+			marking.color = cell.marking.color
+			marking.shape = cell.marking.shape
+			var grid_origin = Vector2(4, 4)
+			var desiredGridPosition = Vector2(column_index, row_index) + grid_origin
+			var generatedPosition = map_to_world(desiredGridPosition) + cell_size / 2
+			marking.position = generatedPosition
+			add_child(marking)
+			print("marking added" + marking.color + marking.shape)
 
 func load_room(in_room_data):
 	print("loading room data")
 	room_data = in_room_data;
-	print(JSON.print(room_data.room.grid[0][1], "  ")) # how to access a cell
-#	TODO: set up markings
-#	for row in room_data.room.grid:
-#		for cell in row:
-#			if !empty(cell.marking):
-#				Marking.new()
-#	add_child()
+	print(JSON.print(room_data.room.grid[0][1], "  "))
+	load_markings(in_room_data)
 
 func _on_BackendControl_room_data_loaded(room_data):
 	load_room(room_data)
-	pass # Replace with function body.

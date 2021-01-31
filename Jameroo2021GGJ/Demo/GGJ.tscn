@@ -54,7 +54,6 @@ format = 1
 tile_data = PoolIntArray( 65539, 10, 0 )
 
 [node name="ShadeLight2D" type="Light2D" parent="."]
-visible = false
 light_mask = 0
 scale = Vector2( 100, 100 )
 z_index = 100
@@ -70,3 +69,4 @@ __meta__ = {
 [node name="BackendControl" parent="." instance=ExtResource( 5 )]
 
 [node name="BackgroundMusic" parent="." instance=ExtResource( 6 )]
+[connection signal="room_data_loaded" from="BackendControl" to="InteractiveTerrain" method="_on_BackendControl_room_data_loaded"]
