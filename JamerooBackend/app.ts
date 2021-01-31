@@ -119,6 +119,17 @@ let roomByRoomId: { [key: string]: I.Room } = {
     room22: room22
 }
 
+function generateRoomId(): string {
+    let length: number = 6;
+    let result: string = '';
+    let characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ123456789'; // no letter O/number 0, shit's confusing
+    let charactersLength: number = characters.length;
+    for (let i: number = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 app.get('/isRunning', (req:any, res:any) => {
     res.json(200, true);
 });
@@ -134,16 +145,18 @@ app.get('/roomState/:roomId', (req: any, res: any) => {
     res.status(200);
 });
 
-function generateRoomId(): string {
-    let length: number = 6;
-    let result: string = '';
-    let characters = 'ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789'; // no O, shit's confusing
-    let charactersLength: number = characters.length;
-    for (let i: number = 0; i < length; i++) {
-        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-}
+app.post('/roomState/:roomId', (req: any, res: any) => {
+    let roomId: string = req.params.roomId;
+
+    roomByRoomId[roomId] = req.body.room;
+
+    let createRoomStateResponse: I.CreateRoomStateResponse = {
+        roomId: roomId
+    };
+
+    res.json(createRoomStateResponse);
+    res.status(200);
+});
 
 app.post('/roomState/', (req: any, res: any) => {
     let roomId: string = generateRoomId();
