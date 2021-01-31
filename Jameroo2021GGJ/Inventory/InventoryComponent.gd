@@ -12,7 +12,7 @@ var inv_struct_list := Array()
 var inv_amount_list := Array()
 var interactor = get_parent()
 var window_ref # Type: Inventory Window (setting in toggle_window())
-
+var inv_most_recent_index
 
 func _ready():
 	prepare_inventory()
@@ -38,8 +38,15 @@ func add_to_inventory(struct:IItem, amount:int):
 				_succ = create_stack(struct, amount)
 		else:
 			_succ = create_stack(struct, amount)
+	if _succ:
+		consume_on_pickup()
 	return _succ
 
+func consume_on_pickup():
+	if inv_amount_list[inv_most_recent_index] > 0:
+		inv_struct_list[inv_most_recent_index].i_pickup(get_tree().get_nodes_in_group("Player")[0])
+		inv_amount_list[inv_most_recent_index] -= 1
+		refresh_slot_at_index(inv_most_recent_index)
 
 func has_partial_stack(struct:IItem) -> Array:
 	var loc_i: int = -1
@@ -72,6 +79,7 @@ func create_stack(struct:IItem, amount:int) -> bool:
 			inv_amount_list[found_index] = amount
 		inv_struct_list[found_index] = struct
 		refresh_slot_at_index(found_index)
+		inv_most_recent_index = found_index
 		return true
 	else:
 		return false
@@ -88,6 +96,7 @@ func add_to_stack(struct:IItem, amount:int, index:int):
 		inv_amount_list[index] += amount
 		struct.queue_free()
 		refresh_slot_at_index(index)
+		inv_most_recent_index = index
 	return true
 
 

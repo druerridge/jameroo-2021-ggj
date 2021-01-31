@@ -130,7 +130,8 @@ color = Color( 0, 0, 0, 1 )
 mode = 3
 
 [node name="VisibleLight2D" type="Light2D" parent="Pivot"]
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( -26.0074, -26.0074 )
+scale = Vector2( 2.0989, 2.0989 )
 z_index = 101
 texture = ExtResource( 5 )
 

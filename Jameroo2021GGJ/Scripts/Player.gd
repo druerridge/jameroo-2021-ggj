@@ -3,12 +3,15 @@ extends "res://Scripts/Actor.gd"
 export(NodePath) var gui_path = "GUI"
 onready var gui = get_node(gui_path)
 
-var canMove
+var stunnedTimer = 0
 
 func _process(delta):
-	if(canMove == false):
-		return
-		
+	if stunnedTimer > 0:
+		stunnedTimer -= delta
+	elif stunnedTimer > -1:
+		stunnedTimer = -1
+		InputSystem.reset_movement_inputs()
+	
 	if InputSystem.input_activation:
 		activate_object()
 	if InputSystem.input_direction:

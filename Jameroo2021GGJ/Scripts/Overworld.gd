@@ -7,6 +7,7 @@ var stale_children = false
 var rng = RandomNumberGenerator.new()
 
 func _ready():
+	print(CELL_TYPES)
 	rng.randomize()
 	process_actor_spawn_conditions()
 	refresh_children()

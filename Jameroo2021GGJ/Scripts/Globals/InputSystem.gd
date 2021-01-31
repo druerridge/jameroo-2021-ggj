@@ -3,9 +3,13 @@ extends Node
 var input_direction
 var input_activation
 
+var default_movement_inputs = [ "ui_up", "ui_right", "ui_down", "ui_left" ]
+var current_movement_inputs = []
+
 func _ready():
 	# Do not disable this when game is paused
 	set_pause_mode(PAUSE_MODE_PROCESS)
+	reset_movement_inputs()
 
 
 func _process(delta):
@@ -14,14 +18,19 @@ func _process(delta):
 
 
 func get_input_direction():
-	var horizontal = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	var vertical = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	var horizontal = int(Input.is_action_pressed(current_movement_inputs[1])) - int(Input.is_action_pressed(current_movement_inputs[3]))
+	var vertical = int(Input.is_action_pressed(current_movement_inputs[2])) - int(Input.is_action_pressed(current_movement_inputs[0]))
 	return Vector2(horizontal, vertical if horizontal == 0 else 0)
 
 
 func get_input_activation():
 	return Input.is_action_just_pressed("ui_accept")
 
+func randomize_movement_inputs():
+	current_movement_inputs.shuffle()
+
+func reset_movement_inputs():
+	current_movement_inputs = default_movement_inputs
 
 # Extremely useful for things like stopping "interact" from looping
 # E.G. actor displays dialog, "interact" is the same button that closes dialog
