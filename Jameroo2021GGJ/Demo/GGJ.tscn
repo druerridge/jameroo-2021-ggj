@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/LevelLoader.gd" type="Script" id=1]
 [ext_resource path="res://Demo/ggj_tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://Sprites/shade-light-mask.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/OverworldObject.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Objects/BackendControl.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Objects/BackgroundMusic.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=7]
 
 [sub_resource type="OccluderPolygon2D" id=1]
@@ -53,6 +54,7 @@ format = 1
 tile_data = PoolIntArray( 65539, 10, 0 )
 
 [node name="ShadeLight2D" type="Light2D" parent="."]
+visible = false
 light_mask = 0
 scale = Vector2( 100, 100 )
 z_index = 100
@@ -66,3 +68,5 @@ __meta__ = {
 }
 
 [node name="BackendControl" parent="." instance=ExtResource( 5 )]
+
+[node name="BackgroundMusic" parent="." instance=ExtResource( 6 )]
