@@ -16,6 +16,42 @@ func _ready():
 	refresh_children()
 	randomize_diggable_positions()
 
+func unspawn_marking(world_pos:Vector2):
+	var dig_pos = world_to_dig(world_pos)
+	var map_pos = world_to_map(world_pos)
+	if (!valid_dig_pos(dig_pos)):
+		return
+	var existing_marking = get_overworld_marking(map_pos)
+	if (existing_marking != null):
+		remove_child(existing_marking)
+	var cell = origin_room_data.room.grid[dig_pos.x][dig_pos.y]
+	cell.marking.color = "nocolor"
+	cell.marking.shape = "noshape"
+
+func spawn_marking(color, shape, world_pos:Vector2):
+	var dig_pos = world_to_dig(world_pos)
+	var map_pos = world_to_map(world_pos)
+	if (!valid_dig_pos(dig_pos)):
+		return
+	if (color == "nocolor" and shape == "noshape"):
+		return
+	var existing_marking = get_overworld_marking(map_pos)
+	if (existing_marking != null):
+		remove_child(existing_marking)
+	var marking = marking_template.instance()
+	marking.color = color
+	marking.shape = shape
+	marking.position = world_pos
+	add_child(marking)
+	refresh_children()
+	var cell = origin_room_data.room.grid[dig_pos.x][dig_pos.y]
+	cell.marking.color = color
+	cell.marking.shape = shape
+
+func spawn_marking_dig(color, shape, dig_pos:Vector2):
+	var world_pos = dig_to_world(dig_pos)
+	spawn_marking(color, shape, world_pos)
+
 func _process(delta):
 	check_if_won()
 
@@ -24,6 +60,21 @@ func _process(delta):
 func refresh_children():
 	children = get_children()
 
+func get_overworld_marking(map_pos):
+	for node in children:
+		# Protects against certain situations where an object is queued to be
+		# freed
+		if !is_instance_valid(node):
+			stale_children = true
+			continue
+		else:
+			if (node.get("is_marking")):
+				var node_map_pos = world_to_map(node.position)
+				if (node_map_pos == map_pos):
+					return(node)
+	if stale_children:
+		stale_children = false
+		refresh_children()
 
 # Iterate through EVERY object in the overworld and find the right one
 # Could probably be done better
@@ -106,18 +157,16 @@ func dig_to_world(dig_grid_position: Vector2):
 	var map_grid_position = dig_to_map(dig_grid_position)
 	return map_to_world(map_grid_position) + cell_size / 2
 
+func world_to_dig(world_pos: Vector2):
+	var map_pos = world_to_map(world_pos)
+	return map_to_dig(map_pos)
+
 func load_markings(in_room_data):
 	for x_index in range(0, in_room_data.room.grid.size()):
 		for y_index in range(0, in_room_data.room.grid[x_index].size()):
 			var cell = in_room_data.room.grid[x_index][y_index]
-			var marking = marking_template.instance()
-			marking.color = cell.marking.color
-			marking.shape = cell.marking.shape
 			var dig_grid_position = Vector2(y_index, x_index)
-			marking.position = dig_to_world(dig_grid_position)
-			if (cell.marking.color == "nocolor"):
-				continue
-			add_child(marking)
+			spawn_marking_dig(cell.marking.color, cell.marking.shape, dig_grid_position)
 
 func valid_dig_pos(dig_pos:Vector2):
 	return dig_pos.x >= 0 && dig_pos.y >= 0 && dig_pos.x < room_data.room.grid.size() && dig_pos.y < room_data.room.grid[0].size()
@@ -130,8 +179,7 @@ func attempt_dig(player):
 	if (!valid_dig_pos(dig_pos)):
 		print("invalid dig position")
 		return
-	var json_parse_result = JSON.parse(JSON.print(room_data.room.grid[dig_pos.x][dig_pos.y], " "))
-	var cell = json_parse_result.result
+	var cell = room_data.room.grid[dig_pos.x][dig_pos.y]
 	var color = player.CELL_COLORS.keys()[player.obj_color].to_lower()
 	print(cell.digResultByColor[color])
 	var item = cell.digResultByColor[color].items.pop_back()
@@ -154,7 +202,7 @@ func get_grid_data_with_color(requesting_object, digResult):
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.YELLOW:
 		return digResult.yellow
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.BLUE:
-		return digResult.blue
+		return digResult.color2
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.PURPLE:
 		return digResult.purple
 

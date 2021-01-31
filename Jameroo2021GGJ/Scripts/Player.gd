@@ -9,6 +9,12 @@ export(Script) var initial_shovel
 
 var drunkTimer = 0
 
+var obj_color_to_color = {
+	CELL_COLORS.YELLOW: "yellow",
+	CELL_COLORS.BLUE: "blue",
+	CELL_COLORS.PURPLE: "purple"
+}
+
 func _ready():
 	obj_color = CELL_COLORS.YELLOW
 	var newItem = initial_shovel.new("yellow")
@@ -32,8 +38,18 @@ func _process(delta):
 		$InventoryComponent.toggle_window(self)
 	if Input.is_action_just_pressed("action_dig"):
 		attempt_dig()
-
-
+	if Input.is_action_just_pressed("mark_tri"):
+		var marking_color = obj_color_to_color[obj_color]
+		overworld.spawn_marking(marking_color, "tri", self.position)
+	if Input.is_action_just_pressed("mark_x"):
+		var marking_color = obj_color_to_color[obj_color]
+		overworld.spawn_marking(marking_color, "x", self.position)
+	if Input.is_action_just_pressed("mark_o"):
+		var marking_color = obj_color_to_color[obj_color]
+		overworld.spawn_marking(marking_color, "o", self.position)
+	if Input.is_action_just_pressed("unmark"):
+		overworld.unspawn_marking(self.position)
+		
 # Make a vector of the direction we're facing, then ask the grid to interact
 # with whatever is there
 func activate_object():
