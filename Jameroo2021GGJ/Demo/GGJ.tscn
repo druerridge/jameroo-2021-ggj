@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/LevelLoader.gd" type="Script" id=1]
 [ext_resource path="res://Demo/ggj_tiles.tres" type="TileSet" id=2]
 [ext_resource path="res://Sprites/shade-light-mask.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/OverworldObject.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Objects/BackendControl.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=7]
 
 [sub_resource type="OccluderPolygon2D" id=1]
@@ -63,3 +64,5 @@ shadow_item_cull_mask = 2
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="BackendControl" parent="." instance=ExtResource( 5 )]
