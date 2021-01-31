@@ -10,10 +10,9 @@ signal interact(sender, item)
 
 var item
 
-func _ready():
-	#$Pivot/Sprite.visible = false
+func init(color):
 	if not itemDirectory == null:
-		item = itemDirectory.new()
+		item = itemDirectory.new(color)
 
 func interact():
 	if($Pivot/Sprite.visible == true):

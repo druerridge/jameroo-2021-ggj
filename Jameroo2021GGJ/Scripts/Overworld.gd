@@ -123,6 +123,7 @@ func dig_at_grid_pos(requesting_object, grid_pos):
 	var newItem = loadedItem.instance()
 	add_child(newItem)
 	newItem.position = requesting_object.position
+	newItem.init(colorResult.items[0].color)
 	return newItem
 
 func get_grid_data_with_color(requesting_object, digResult):

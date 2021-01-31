@@ -1,11 +1,12 @@
 extends IItem
 
 
-func _init():
+func _init(color):
 	self.i_name = "Beer"
 	self.i_image = load("res://Inventory/Items/Bomb.png")
 	self.i_description = "If you pick me up, I will stun you"
 	self.i_stackable = false
+	self.i_color = color
 
 func i_pickup(player):
 	player.drunkTimer = 10
