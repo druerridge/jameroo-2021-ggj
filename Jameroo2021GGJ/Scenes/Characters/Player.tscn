@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Demo/character.png" type="Texture" id=2]
+[ext_resource path="res://Demo/character-big.png" type="Texture" id=2]
 [ext_resource path="res://Inventory/UI/InventoryWindow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Inventory/InventoryComponent.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/light-mask.png" type="Texture" id=5]
@@ -101,7 +101,6 @@ window_scene = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
 position = Vector2( 0, -32 )
-scale = Vector2( 4, 4 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 4

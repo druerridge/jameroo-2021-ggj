@@ -23,11 +23,12 @@ tile_set = ExtResource( 2 )
 cell_quadrant_size = 64
 cell_y_sort = true
 format = 1
-tile_data = PoolIntArray( -458746, 8, 0 )
+tile_data = PoolIntArray( -458746, 8, 0, 131075, 9, 0, 196611, 8, 0, 262147, 7, 0 )
 script = ExtResource( 7 )
 
 [node name="OnTopTerrain" type="TileMap" parent="."]
-z_index = 50
+z_index = 100
 tile_set = ExtResource( 2 )
 cell_quadrant_size = 64
 format = 1
+tile_data = PoolIntArray( 65539, 10, 0 )
