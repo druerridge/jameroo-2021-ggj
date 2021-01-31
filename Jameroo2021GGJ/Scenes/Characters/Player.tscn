@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Demo/character-big.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Sprites/light-mask.png" type="Texture" id=5]
 [ext_resource path="res://Inventory/UI/ShovelInventoryWindow.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Inventory/Items/Shovel.gd" type="Script" id=7]
+[ext_resource path="res://Fonts/MAGMED.tres" type="DynamicFontData" id=8]
 
 [sub_resource type="Animation" id=1]
 resource_name = "bump"
@@ -76,6 +77,10 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 8 ]
 }
 
+[sub_resource type="DynamicFont" id=5]
+size = 20
+font_data = ExtResource( 8 )
+
 [node name="Player" type="Node2D" groups=[
 "Player",
 "actors",
@@ -142,6 +147,28 @@ anchor_left = 0.334
 anchor_top = 0.268
 anchor_right = 0.425
 anchor_bottom = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls" type="Label" parent="Pivot/CanvasLayer"]
+light_mask = 0
+margin_left = 7.11646
+margin_top = 442.739
+margin_right = 254.116
+margin_bottom = 764.739
+custom_fonts/font = SubResource( 5 )
+text = "WASD: Move
+
+X: Mark with X
+C: Mark with O
+V: Mark with Triangle
+Q: Remove Mark
+
+Z: Select Shovel
+Enter: Dig
+
+Space: Pick Up Item / Interact"
 __meta__ = {
 "_edit_use_anchors_": false
 }
