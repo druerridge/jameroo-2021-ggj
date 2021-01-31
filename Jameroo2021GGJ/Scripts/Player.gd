@@ -4,19 +4,20 @@ export(NodePath) var gui_path = "GUI"
 onready var gui = get_node(gui_path)
 export(NodePath) var shovel_gui_path = "Shovel_GUI"
 onready var shovel_gui = get_node(shovel_gui_path)
-#onready var shovelOptionsArea = $Pivot/CanvasLayer/ShovelsUI/ShovelOptions
+
+export(Script) var initial_shovel
 
 var drunkTimer = 0
 
 func _ready():
-	obj_color = 1
+	obj_color = CELL_COLORS.YELLOW
+	var newItem = initial_shovel.new("yellow")
+	$ShovelInvComponent.add_to_inventory(newItem, 1)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_shovel"):
 		$ShovelInvComponent.toggle_window(self)
-	#obj_color = shovelOptionsArea.currentSelection + 1
-	#if shovelOptionsArea.visible:
-		#return
+	
 	if drunkTimer > 0:
 		drunkTimer -= delta
 	elif drunkTimer > -1:
@@ -41,11 +42,10 @@ func activate_object():
 	overworld.request_interaction(self, Vector2.ZERO)
 
 func _on_item_interacted(sender, item):
-	if not correct_shovel_color(sender):
-		return
-	print (item.i_name)
-	if item.i_name == "Shovel": 
-		if $ShovelInvComponent.add_to_inventory(item, 1):
+	if item.i_name == "Shovel":
+		print("WE ARE TRYING TO ADD A SHOVEL")
+		if $ShovelInvComponent.inv_query(item.i_name, 1) && $ShovelInvComponent.add_to_inventory(item, 1):
+			print("WE SUCCESSFULY ADDED A SHOVEL")
 			sender.queue_free()
 			overworld.remove_from_active(sender)
 	elif $InventoryComponent.add_to_inventory(item, 1):

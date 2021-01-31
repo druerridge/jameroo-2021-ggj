@@ -9,6 +9,7 @@
 ]]
 script = ExtResource( 2 )
 obj_type = 2
+obj_color = 1
 itemDirectory = ExtResource( 3 )
 
 [node name="Pivot" type="Position2D" parent="."]

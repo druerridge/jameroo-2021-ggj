@@ -132,8 +132,9 @@ func attempt_dig(player):
 		return
 	var json_parse_result = JSON.parse(JSON.print(room_data.room.grid[dig_pos.x][dig_pos.y], " "))
 	var cell = json_parse_result.result
-#	var colorResult = get_grid_data_with_color(requesting_object, cell.digResultByColor)
-	var item = cell.digResultByColor["purple"].items.pop_back()
+	var color = player.CELL_COLORS.keys()[player.obj_color].to_lower()
+	print(cell.digResultByColor[color])
+	var item = cell.digResultByColor[color].items.pop_back()
 	if (item != null):
 		var item_name = item.name
 		print("Found item: " + item_name)
@@ -151,11 +152,11 @@ func attempt_dig(player):
 
 func get_grid_data_with_color(requesting_object, digResult):
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.YELLOW:
-		return digResult.color1
+		return digResult.yellow
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.BLUE:
-		return digResult.color2
+		return digResult.blue
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.PURPLE:
-		return digResult.color3
+		return digResult.purple
 
 func load_room(in_room_data):
 	origin_room_data = in_room_data;
