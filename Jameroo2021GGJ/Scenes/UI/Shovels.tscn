@@ -1,0 +1,25 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/UI/Shovel_UI.gd" type="Script" id=1]
+
+[node name="ShovelOptions" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0235294, 0.0156863, 0.713726, 0.333333 )
+
+[node name="ShovelOptions" type="ItemList" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+auto_height = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

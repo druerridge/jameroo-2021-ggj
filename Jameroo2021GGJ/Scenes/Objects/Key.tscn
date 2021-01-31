@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/DiggableObject.gd" type="Script" id=1]
 [ext_resource path="res://Inventory/Items/Staff.png" type="Texture" id=2]
+[ext_resource path="res://Inventory/Items/Item_Key.gd" type="Script" id=3]
 
 [node name="Key" type="Node2D" groups=[
 "Diggable",
@@ -9,6 +10,7 @@
 ]]
 script = ExtResource( 1 )
 obj_type = 2
+itemDirectory = ExtResource( 3 )
 
 [node name="Pivot" type="Position2D" parent="."]
 
