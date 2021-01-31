@@ -10,15 +10,11 @@ var room_data
 const marking_template = preload("res://Scenes/Objects/Marking.tscn")
 
 func _ready():
-	print(CELL_TYPES)
 	rng.randomize()
 	process_actor_spawn_conditions()
 	refresh_children()
 	randomize_diggable_positions()
-	var diggableObjects = get_tree().get_nodes_in_group("Diggable")
-	for obj in diggableObjects:
-		obj.connect("interacted", self, "_on_item_interacted")
-		
+
 func _process(delta):
 	check_if_won()
 
@@ -38,7 +34,7 @@ func get_overworld_obj(coordinates):
 			stale_children = true
 			continue
 		else:
-			if world_to_map(node.position) == coordinates:
+			if world_to_map(node.position) == coordinates && node.name != "Player":
 				return(node)
 	if stale_children:
 		stale_children = false
@@ -49,11 +45,15 @@ func request_interaction(requesting_object, direction):
 	var cell_start = world_to_map(requesting_object.position)
 	var cell_target = world_to_map(requesting_object.position) + direction
 	var cell_obj = get_overworld_obj(cell_target)
-	dig_at_grid_pos(requesting_object, cell_target)
 	if !cell_obj:
+		cell_obj = dig_at_grid_pos(requesting_object, cell_target)
+		if cell_obj:
+			cell_obj.connect("interact", requesting_object, "_on_item_interacted")
+		refresh_children()
 		return
 	if cell_obj.obj_type != CELL_TYPES.ACTOR && cell_obj.obj_type != CELL_TYPES.DIGGABLE:
 		return
+	
 	cell_obj.interact()
 
 
@@ -120,14 +120,27 @@ func load_markings(in_room_data):
 			var generatedPosition = map_to_world(desiredGridPosition) + cell_size / 2
 			marking.position = generatedPosition
 			add_child(marking)
-			print("marking added" + marking.color + marking.shape)
+			#print("marking added" + marking.color + marking.shape)
 
 func dig_at_grid_pos(requesting_object, grid_pos):
 	var output = JSON.parse(JSON.print(room_data.room.grid[0][1], " "))
-	var colorResult = output.result.digResultByColor.color1
+	var colorResult = get_grid_data_with_color(requesting_object, output.result.digResultByColor)
 	var stringName = "Beer"
-	#var newItem = load("res://Scenes/Objects/" +stringName+".tscn").load()
+	var loadedItem = load("res://Scenes/Objects/" +stringName+".tscn")
+	if !loadedItem:
+		return
+	var newItem = loadedItem.instance()
+	add_child(newItem)
+	newItem.position = requesting_object.position
+	return newItem
 
+func get_grid_data_with_color(requesting_object, digResult):
+	if requesting_object.obj_color == requesting_object.CELL_COLORS.Color1:
+		return digResult.color1
+	if requesting_object.obj_color == requesting_object.CELL_COLORS.Color2:
+		return digResult.color2
+	if requesting_object.obj_color == requesting_object.CELL_COLORS.Color3:
+		return digResult.color3
 
 func load_room(in_room_data):
 	#print("loading room data")

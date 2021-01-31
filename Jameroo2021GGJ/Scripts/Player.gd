@@ -41,7 +41,6 @@ func activate_object():
 
 func _on_item_interacted(sender, item):
 	if not correct_shovel_color(sender):
-		print("not the correct color")
 		return
 	if $InventoryComponent.add_to_inventory(item, 1):
 		sender.queue_free()

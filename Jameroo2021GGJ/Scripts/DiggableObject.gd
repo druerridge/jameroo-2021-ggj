@@ -6,7 +6,7 @@ export(Script) var itemDirectory
 export var dug_frame = 0
 export var not_dug_frame = 1
 
-signal interacted(sender, item)
+signal interact(sender, item)
 
 var item
 
@@ -17,5 +17,6 @@ func _ready():
 
 func interact():
 	if($Pivot/Sprite.visible == true):
-		emit_signal("interacted", self, item)
+		print("interacting")
+		emit_signal("interact", self, item)
 	$Pivot/Sprite.visible = true

@@ -22,7 +22,7 @@ func instantiate_player():
 	var diggableObjects = get_tree().get_nodes_in_group("Diggable")
 	# set all the diggable object signals to the player
 	for obj in diggableObjects:
-		obj.connect("interacted", player_spawn, "_on_item_interacted")
+		obj.connect("interact", player_spawn, "_on_item_interacted")
 	# Set player at the correct position (spawn point of zone)
 	player_spawn.position = spawn_points[index].position
 	# Make the player face the direction from last movement to create a
