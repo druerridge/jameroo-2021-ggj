@@ -11,6 +11,7 @@ __meta__ = {
 }
 
 [node name="GetRoomButton" type="Button" parent="."]
+visible = false
 margin_top = -0.420448
 margin_right = 86.0
 margin_bottom = 19.5796
@@ -20,6 +21,7 @@ __meta__ = {
 }
 
 [node name="UpdateRoomButton" type="Button" parent="."]
+visible = false
 margin_left = 2.0
 margin_top = 24.0
 margin_right = 97.0
@@ -30,6 +32,7 @@ __meta__ = {
 }
 
 [node name="RoomIdTextEdit" type="TextEdit" parent="."]
+visible = false
 margin_left = 0.159103
 margin_top = 44.9202
 margin_right = 86.1591
@@ -40,6 +43,7 @@ __meta__ = {
 }
 
 [node name="RoomDataRichTextLabel" type="RichTextLabel" parent="."]
+visible = false
 margin_left = 0.579544
 margin_top = 74.7611
 margin_right = 85.5795

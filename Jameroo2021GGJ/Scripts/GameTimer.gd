@@ -30,7 +30,7 @@ func initialize():
 	visibleLightInitialScale = visibleLight.scale
 
 func end_game():
-	pass
+	get_tree().change_scene("res://Scenes/Zones/EndScene.tscn")
 
 func layer_background_music():
 	var oneThirdTime = LEVEL_LENGTH_SECONDS / 3

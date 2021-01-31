@@ -26,7 +26,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="2DGridMovement"
+config/name="John the Wick"
 run/main_scene="res://Demo/GGJ.tscn"
 config/icon="res://icon.png"
 

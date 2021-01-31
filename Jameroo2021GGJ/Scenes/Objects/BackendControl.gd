@@ -55,6 +55,9 @@ func initialize():
 	print("base_url: " + base_url)
 	print("get_room_base_url: " + get_room_base_url)
 
+func get_share_url():
+	return base_url + "?id=" + room_id
+
 func get_room(in_room_id):
 	var url = get_room_base_url + in_room_id
 	var http_request = HTTPRequest.new()
