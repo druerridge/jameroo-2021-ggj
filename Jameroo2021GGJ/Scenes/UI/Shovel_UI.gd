@@ -12,7 +12,6 @@ func _ready():
 func _process(delta):
 	if Input.is_action_just_pressed("ui_up"):
 		currentSelection -= 1
-		print(currentSelection)
 		if currentSelection < 0:
 			currentSelection = numberOfOptions - 1
 	if(Input.is_action_just_pressed("ui_down")):

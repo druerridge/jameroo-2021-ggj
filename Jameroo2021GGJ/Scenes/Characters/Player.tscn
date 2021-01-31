@@ -80,7 +80,7 @@ tracks/0/keys = {
 "actors",
 ]]
 light_mask = -2147483647
-position = Vector2( 32, 32 )
+position = Vector2( 32, 32.7937 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true

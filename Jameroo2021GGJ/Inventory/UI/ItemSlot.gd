@@ -47,10 +47,8 @@ func _on_gui_input_signal(event):
 		# not event.pressed means released
 		if event.button_index == BUTTON_RIGHT and not event.pressed:
 			if inv_comp.inv_struct_list[slot_index] != null:
-				print(component_parent)
-				
 				var interactor_inv_comp = inv_comp.interactor.get_node(component_parent)
-				
+				print(inv_comp.inv_struct_list[slot_index].i_color)
 				if inv_comp == interactor_inv_comp:
 					inv_comp.use_item_at_slot(slot_index)
 				# If right clicking item from a Container, don't use it, but add it

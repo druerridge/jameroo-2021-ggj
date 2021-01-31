@@ -17,7 +17,6 @@ func _process(delta):
 	#obj_color = shovelOptionsArea.currentSelection + 1
 	#if shovelOptionsArea.visible:
 		#return
-	
 	if drunkTimer > 0:
 		drunkTimer -= delta
 	elif drunkTimer > -1:
@@ -46,7 +45,6 @@ func _on_item_interacted(sender, item):
 		return
 	print (item.i_name)
 	if item.i_name == "Shovel": 
-		print("is a shovel")
 		if $ShovelInvComponent.add_to_inventory(item, 1):
 			sender.queue_free()
 			overworld.remove_from_active(sender)
@@ -69,3 +67,12 @@ func get_gui(caller):
 	if "Shovel" in caller:
 		return shovel_gui
 	return gui
+
+func set_shovel_color(color):
+	color = color.to_upper()
+	if color == CELL_COLORS.keys()[1]:
+		obj_color = CELL_COLORS.YELLOW
+	if color == CELL_COLORS.keys()[2]:
+		obj_color = CELL_COLORS.BLUE
+	if color == CELL_COLORS.keys()[3]:
+		obj_color = CELL_COLORS.PURPLE

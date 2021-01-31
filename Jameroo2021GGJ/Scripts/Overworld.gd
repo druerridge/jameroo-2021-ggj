@@ -117,8 +117,7 @@ func dig_at_grid_pos(requesting_object, grid_pos):
 	var output = JSON.parse(JSON.print(room_data.room.grid[0][1], " "))
 	var colorResult = get_grid_data_with_color(requesting_object, output.result.digResultByColor)
 	var stringName = colorResult.items[0].name
-	print(stringName)
-	var loadedItem = load("res://Scenes/Objects/" +stringName+".tscn")
+	var loadedItem = load("res://Scenes/Objects/" + stringName + ".tscn")
 	if !loadedItem:
 		return
 	var newItem = loadedItem.instance()
@@ -127,11 +126,11 @@ func dig_at_grid_pos(requesting_object, grid_pos):
 	return newItem
 
 func get_grid_data_with_color(requesting_object, digResult):
-	if requesting_object.obj_color == requesting_object.CELL_COLORS.Color1:
+	if requesting_object.obj_color == requesting_object.CELL_COLORS.YELLOW:
 		return digResult.color1
-	if requesting_object.obj_color == requesting_object.CELL_COLORS.Color2:
+	if requesting_object.obj_color == requesting_object.CELL_COLORS.BLUE:
 		return digResult.color2
-	if requesting_object.obj_color == requesting_object.CELL_COLORS.Color3:
+	if requesting_object.obj_color == requesting_object.CELL_COLORS.PURPLE:
 		return digResult.color3
 
 func load_room(in_room_data):
