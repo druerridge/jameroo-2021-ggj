@@ -1,8 +1,8 @@
 extends Control
 
 var get_room_base_url = "UNDEFINED YO"
-#var base_hostname = "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
-var base_url = "http://localhost:10999/" # for testing with a local backend
+var base_url = "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
+#var base_url = "http://localhost:10999/" # for testing with a local backend
 var room_id = "room22"
 var room_data = {}
 
