@@ -86,36 +86,36 @@ class PresetData {
 
         let cell00: I.Cell = {
             digResultByColor: {
-                color1: { items: [redbullItem] },
-                color2: { items: [redbullItem] },
-                color3: { items: [redbullItem] }
+                yellow: { items: [redbullItem] },
+                blue: { items: [redbullItem] },
+                purple: { items: [redbullItem] }
             },
             marking: COLOR1_SHAPE1
         };
 
         let cell01: I.Cell = {
             digResultByColor: {
-                color1: { items: [color2Shovel] },
-                color2: { items: [color3Shovel] },
-                color3: { items: [keyItem] }
+                yellow: { items: [color2Shovel] },
+                blue: { items: [color3Shovel] },
+                purple: { items: [keyItem] }
             },
             marking: COLOR2_SHAPE2
         };
 
         let cell10: I.Cell = {
             digResultByColor: {
-                color1: { items: [beerItem] },
-                color2: { items: [beerItem] },
-                color3: { items: [beerItem] }
+                yellow: { items: [beerItem] },
+                blue: { items: [beerItem] },
+                purple: { items: [beerItem] }
             },
             marking: COLOR3_SHAPE3
         };
 
         let cell11: I.Cell = {
             digResultByColor: {
-                color1: { items: [] },
-                color2: { items: [] },
-                color3: { items: [] }
+                yellow: { items: [] },
+                blue: { items: [] },
+                purple: { items: [] }
             },
             marking: NOMARKING
         };

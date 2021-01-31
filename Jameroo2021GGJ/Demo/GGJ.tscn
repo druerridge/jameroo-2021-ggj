@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/LevelLoader.gd" type="Script" id=1]
 [ext_resource path="res://Demo/ggj_tiles.tres" type="TileSet" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Scenes/Objects/BackendControl.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Objects/BackgroundMusic.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=7]
-[ext_resource path="res://Scenes/Objects/GameTimer.tscn" type="PackedScene" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 closed = false
@@ -70,6 +69,4 @@ __meta__ = {
 [node name="BackendControl" parent="." instance=ExtResource( 5 )]
 
 [node name="BackgroundMusic" parent="." instance=ExtResource( 6 )]
-
-[node name="GameTimer" parent="." instance=ExtResource( 8 )]
 [connection signal="room_data_loaded" from="BackendControl" to="InteractiveTerrain" method="_on_BackendControl_room_data_loaded"]

@@ -38,7 +38,7 @@ func _process(delta):
 func activate_object():
 	var direction_of_interaction = Vector2((int(dir == DIR.RIGHT) - int(
 			dir == DIR.LEFT)), (int(dir == DIR.DOWN) - int(dir == DIR.UP)))
-	overworld.request_interaction(self, direction_of_interaction)
+	overworld.request_interaction(self, Vector2.ZERO)
 
 func _on_item_interacted(sender, item):
 	if not correct_shovel_color(sender):
@@ -57,7 +57,7 @@ func correct_shovel_color(sender):
 	return sender.obj_color == CELL_COLORS.NONE || sender.obj_color == self.obj_color
 
 func attempt_dig():
-	overworld.request_interaction(self, Vector2.ZERO)
+	overworld.attempt_dig(self)
 	
 func start_dig():
 	var should_dig = yield()

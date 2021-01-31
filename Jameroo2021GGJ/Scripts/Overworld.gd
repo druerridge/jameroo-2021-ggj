@@ -5,6 +5,7 @@ enum CELL_TYPES {EMPTY = -1, ACTOR, OBJECT, DIGGABLE}
 var children
 var stale_children = false
 var rng = RandomNumberGenerator.new()
+var origin_room_data
 var room_data
 
 const marking_template = preload("res://Scenes/Objects/Marking.tscn")
@@ -40,20 +41,14 @@ func get_overworld_obj(coordinates):
 		stale_children = false
 		refresh_children()
 
-
 func request_interaction(requesting_object, direction):
 	var cell_start = world_to_map(requesting_object.position)
 	var cell_target = world_to_map(requesting_object.position) + direction
 	var cell_obj = get_overworld_obj(cell_target)
 	if !cell_obj:
-		cell_obj = dig_at_grid_pos(requesting_object, cell_target)
-		if cell_obj:
-			cell_obj.connect("interact", requesting_object, "_on_item_interacted")
-		refresh_children()
 		return
-	if cell_obj.obj_type != CELL_TYPES.ACTOR && cell_obj.obj_type != CELL_TYPES.DIGGABLE:
-		return
-	
+	cell_obj.connect("interact", requesting_object, "_on_item_interacted")
+	refresh_children()
 	cell_obj.interact()
 
 
@@ -99,32 +94,60 @@ func process_actor_spawn_conditions():
 		if !obj.spawn_condition():
 			obj.call_deferred("free")
 
+func dig_to_map(dig_grid_position: Vector2):
+	var dig_grid_origin_map_pos = Vector2(4, 4)
+	return dig_grid_position + dig_grid_origin_map_pos
+
+func map_to_dig(map_grid_position: Vector2):
+	var dig_grid_origin = Vector2(4, 4)
+	return map_grid_position - dig_grid_origin
+
+func dig_to_world(dig_grid_position: Vector2):
+	var map_grid_position = dig_to_map(dig_grid_position)
+	return map_to_world(map_grid_position) + cell_size / 2
+
 func load_markings(in_room_data):
-	for row_index in range(0, in_room_data.room.grid.size()):
-		for column_index in range(0, in_room_data.room.grid[row_index].size()):
-			var cell = in_room_data.room.grid[row_index][column_index]
+	for x_index in range(0, in_room_data.room.grid.size()):
+		for y_index in range(0, in_room_data.room.grid[x_index].size()):
+			var cell = in_room_data.room.grid[x_index][y_index]
 			var marking = marking_template.instance()
 			marking.color = cell.marking.color
 			marking.shape = cell.marking.shape
-			var grid_origin = Vector2(4, 4)
-			var desiredGridPosition = Vector2(column_index, row_index) + grid_origin
-			var generatedPosition = map_to_world(desiredGridPosition) + cell_size / 2
-			marking.position = generatedPosition
+			var dig_grid_position = Vector2(y_index, x_index)
+			marking.position = dig_to_world(dig_grid_position)
+			if (cell.marking.color == "nocolor"):
+				continue
 			add_child(marking)
-			#print("marking added" + marking.color + marking.shape)
 
-func dig_at_grid_pos(requesting_object, grid_pos):
-	var output = JSON.parse(JSON.print(room_data.room.grid[0][1], " "))
-	var colorResult = get_grid_data_with_color(requesting_object, output.result.digResultByColor)
-	var stringName = colorResult.items[0].name
-	var loadedItem = load("res://Scenes/Objects/" + stringName + ".tscn")
-	if !loadedItem:
+func valid_dig_pos(dig_pos:Vector2):
+	return dig_pos.x >= 0 && dig_pos.y >= 0 && dig_pos.x < room_data.room.grid.size() && dig_pos.y < room_data.room.grid[0].size()
+
+func attempt_dig(player):
+	var map_pos = world_to_map(player.position)
+#	print("Digging at map_pos: " + str(player.position))
+	var dig_pos = map_to_dig(map_pos)
+	print("Digging at dig_pos: " + str(dig_pos))
+	if (!valid_dig_pos(dig_pos)):
+		print("invalid dig position")
 		return
-	var newItem = loadedItem.instance()
-	add_child(newItem)
-	newItem.position = requesting_object.position
-	newItem.init(colorResult.items[0].color)
-	return newItem
+	var json_parse_result = JSON.parse(JSON.print(room_data.room.grid[dig_pos.x][dig_pos.y], " "))
+	var cell = json_parse_result.result
+#	var colorResult = get_grid_data_with_color(requesting_object, cell.digResultByColor)
+	var item = cell.digResultByColor["purple"].items.pop_back()
+	if (item != null):
+		var item_name = item.name
+		print("Found item: " + item_name)
+		var loadedItem = load("res://Scenes/Objects/" + item_name + ".tscn")
+		if !loadedItem:
+			return
+		var newItem = loadedItem.instance()
+		newItem.position = player.position
+		newItem.init(item.color)
+		add_child(newItem)
+		refresh_children()
+		return newItem
+	else:
+		print("no items found")
 
 func get_grid_data_with_color(requesting_object, digResult):
 	if requesting_object.obj_color == requesting_object.CELL_COLORS.YELLOW:
@@ -135,9 +158,8 @@ func get_grid_data_with_color(requesting_object, digResult):
 		return digResult.color3
 
 func load_room(in_room_data):
-	#print("loading room data")
-	room_data = in_room_data;
-	#print(JSON.print(room_data.room.grid[0][1], "  "))
+	origin_room_data = in_room_data;
+	room_data = origin_room_data.duplicate()
 	load_markings(in_room_data)
 
 func _on_BackendControl_room_data_loaded(room_data):
