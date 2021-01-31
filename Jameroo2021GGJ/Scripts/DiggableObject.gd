@@ -17,6 +17,5 @@ func _ready():
 
 func interact():
 	if($Pivot/Sprite.visible == true):
-		print("interacting")
 		emit_signal("interact", self, item)
 	$Pivot/Sprite.visible = true

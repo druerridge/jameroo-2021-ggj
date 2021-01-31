@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://Scripts/OverworldObject.gd"
 
 export var shape: String = "nocolor"
 export var color: String = "noshape"

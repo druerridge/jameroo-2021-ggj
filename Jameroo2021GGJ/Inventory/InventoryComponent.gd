@@ -44,9 +44,10 @@ func add_to_inventory(struct:IItem, amount:int):
 
 func consume_on_pickup():
 	if inv_amount_list[inv_most_recent_index] > 0:
-		inv_struct_list[inv_most_recent_index].i_pickup(get_tree().get_nodes_in_group("Player")[0])
-		inv_amount_list[inv_most_recent_index] -= 1
-		refresh_slot_at_index(inv_most_recent_index)
+		var consumed = inv_struct_list[inv_most_recent_index].i_pickup(get_tree().get_nodes_in_group("Player")[0])
+		if consumed:
+			inv_amount_list[inv_most_recent_index] -= 1
+			refresh_slot_at_index(inv_most_recent_index)
 
 func has_partial_stack(struct:IItem) -> Array:
 	var loc_i: int = -1

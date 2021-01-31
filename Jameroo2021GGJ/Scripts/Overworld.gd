@@ -64,10 +64,6 @@ func request_move(requesting_object, direction):
 	if cell_target_type == CELL_TYPES.EMPTY:
 		var cell_obj = get_overworld_obj(cell_target)
 		if cell_obj:
-			if cell_obj.obj_type == CELL_TYPES.OBJECT:
-				cell_obj.do_what_this_object_does()
-				return update_overworld_obj_position(requesting_object,
-						cell_start, cell_target)
 			if cell_obj.obj_type == CELL_TYPES.DIGGABLE:
 				return update_overworld_obj_position(requesting_object,
 						cell_start, cell_target) 
@@ -125,7 +121,8 @@ func load_markings(in_room_data):
 func dig_at_grid_pos(requesting_object, grid_pos):
 	var output = JSON.parse(JSON.print(room_data.room.grid[0][1], " "))
 	var colorResult = get_grid_data_with_color(requesting_object, output.result.digResultByColor)
-	var stringName = "Beer"
+	var stringName = colorResult.items[0].name
+	print(stringName)
 	var loadedItem = load("res://Scenes/Objects/" +stringName+".tscn")
 	if !loadedItem:
 		return

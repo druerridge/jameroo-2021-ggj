@@ -13,4 +13,4 @@ func i_use(_player):
 	print("I was used ", self.i_name)
 	return false
 func i_pickup(_player):
-	print(self.i_name, " picked up")
+	pass

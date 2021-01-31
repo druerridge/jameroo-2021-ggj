@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/defaultunused.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/DiggableObject.gd" type="Script" id=2]
+[ext_resource path="res://Inventory/Items/Shovel.gd" type="Script" id=3]
+
+[node name="Shovel" type="Node2D" groups=[
+"Diggable",
+]]
+script = ExtResource( 2 )
+obj_type = 2
+itemDirectory = ExtResource( 3 )
+
+[node name="Pivot" type="Position2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Pivot"]
+texture = ExtResource( 1 )
