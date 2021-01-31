@@ -27,19 +27,9 @@ animations = [ {
 "name": "purple-x",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
-"name": "yellow-x",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "blue-x",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
-"loop": true,
-"name": "blue-o",
+"name": "yellow-tri",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
@@ -47,14 +37,19 @@ animations = [ {
 "name": "purple-o",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 16 ), ExtResource( 11 ) ],
 "loop": true,
-"name": "yellow-tri",
+"name": "yellow-o",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 1 ) ],
 "loop": true,
-"name": "purple-tri",
+"name": "blue-x",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 10 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "yellow-x",
 "speed": 5.0
 }, {
 "frames": [ ExtResource( 18 ), ExtResource( 17 ) ],
@@ -62,9 +57,14 @@ animations = [ {
 "name": "blue-tri",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "yellow-o",
+"name": "blue-o",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "purple-tri",
 "speed": 5.0
 } ]
 
@@ -72,6 +72,7 @@ animations = [ {
 script = ExtResource( 19 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 3
 frames = SubResource( 1 )
 animation = "yellow-x"
 frame = 1

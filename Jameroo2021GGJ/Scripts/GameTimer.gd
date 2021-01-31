@@ -30,7 +30,7 @@ func initialize():
 	visibleLightInitialScale = visibleLight.scale
 
 func end_game():
-	print("end game!")
+	pass
 
 func layer_background_music():
 	var oneThirdTime = LEVEL_LENGTH_SECONDS / 3
