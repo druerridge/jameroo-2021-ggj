@@ -34,7 +34,6 @@ func attempt_dig():
 	
 func _on_item_interacted(sender, item):
 	if $InventoryComponent.add_to_inventory(item, 1):
-		
 		sender.queue_free()
 		overworld.remove_from_active(sender)
 		overworld.check_if_won()

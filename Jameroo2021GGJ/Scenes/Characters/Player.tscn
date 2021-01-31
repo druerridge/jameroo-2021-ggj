@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Demo/character.png" type="Texture" id=2]
+[ext_resource path="res://Demo/character-big.png" type="Texture" id=2]
 [ext_resource path="res://Inventory/UI/InventoryWindow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Inventory/InventoryComponent.gd" type="Script" id=4]
 [ext_resource path="res://Sprites/light-mask.png" type="Texture" id=5]
@@ -80,12 +80,12 @@ tracks/0/keys = {
 "actors",
 ]]
 light_mask = -2147483647
-position = Vector2( 8, 8 )
+position = Vector2( 32, 32 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
-gui_path = NodePath("Pivot/CanvasLayer/GUI")
+gui_path = NodePath("Pivot/GUI")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/bump = SubResource( 1 )
@@ -100,24 +100,22 @@ window_scene = ExtResource( 3 )
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
-position = Vector2( 0, -8 )
+position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 4
 
 [node name="PlayerCamera" type="Camera2D" parent="Pivot"]
 current = true
-zoom = Vector2( 0.2, 0.2 )
+zoom = Vector2( 0.8, 0.8 )
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Pivot"]
-
-[node name="GUI" type="Control" parent="Pivot/CanvasLayer"]
+[node name="GUI" type="Control" parent="Pivot"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 19.0
-margin_top = 458.0
-margin_right = -16.0
-margin_bottom = -13.0
+margin_left = -94.0
+margin_top = 10.0
+margin_right = 94.0
+margin_bottom = 53.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -130,8 +128,7 @@ color = Color( 0, 0, 0, 1 )
 mode = 3
 
 [node name="VisibleLight2D" type="Light2D" parent="Pivot"]
-position = Vector2( -26.0074, -26.0074 )
-scale = Vector2( 2.0989, 2.0989 )
+scale = Vector2( 1.1, 1.1 )
 z_index = 101
 texture = ExtResource( 5 )
 
