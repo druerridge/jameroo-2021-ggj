@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/LevelLoader.gd" type="Script" id=1]
 [ext_resource path="res://Demo/ggj_tiles.tres" type="TileSet" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Objects/BackgroundMusic.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scripts/Overworld.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Objects/GameTimer.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Zones/EndGate.tscn" type="PackedScene" id=9]
 
 [sub_resource type="OccluderPolygon2D" id=1]
 closed = false
@@ -148,6 +149,12 @@ occluder_light_mask = 3
 format = 1
 tile_data = PoolIntArray( 65554, 10, 0, 131090, 8, 0, 262167, 10, 0, 393232, 10, 0, 458768, 9, 0, 524304, 8, 0, 720921, 10, 0 )
 
+[node name="EndGate" parent="OnTopTerrain" instance=ExtResource( 9 )]
+modulate = Color( 1, 1, 1, 0 )
+light_mask = 3
+position = Vector2( 1530, -250 )
+scale = Vector2( 0.2, 0.2 )
+
 [node name="ShadeLight2D" type="Light2D" parent="."]
 light_mask = 0
 position = Vector2( -1, 0 )
@@ -166,5 +173,7 @@ __meta__ = {
 
 [node name="BackgroundMusic" parent="." instance=ExtResource( 6 )]
 
-[node name="GameTimer" parent="." instance=ExtResource( 8 )]
+[node name="GameTimer" parent="." groups=[
+"gameTimer",
+] instance=ExtResource( 8 )]
 [connection signal="room_data_loaded" from="BackendControl" to="InteractiveTerrain" method="_on_BackendControl_room_data_loaded"]
