@@ -3,7 +3,7 @@ extends IItem
 
 func _init(color):
 	self.i_name = "Beer"
-	self.i_image = load("res://Inventory/Items/Bomb.png")
+	self.i_image = load("res://Sprites/Items/potion_beer.png")
 	self.i_description = "If you pick me up, I will stun you"
 	self.i_stackable = false
 	self.i_color = color

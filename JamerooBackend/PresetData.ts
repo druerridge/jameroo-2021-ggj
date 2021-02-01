@@ -1,6 +1,10 @@
 ﻿import I = require('./Interfaces');
 
 class PresetData {
+    private static getRandomInt(maximum: number) {
+        return Math.floor(Math.random() * Math.floor(maximum));
+    }
+
     public static generateRoom33(): I.Room {
         let room22: I.Room = PresetData.generateRoom22();
 
@@ -33,6 +37,11 @@ class PresetData {
         let REDBULL_NAME: string = "redbull";
         let KEY_NAME: string = "key";
         let SHOVEL_NAME: string = "shovel";
+
+        let itemsList = [SHOVEL_NAME, KEY_NAME, REDBULL_NAME, BEER_NAME]
+        let colorList = [YELLOW, BLUE, PURPLE]
+        let itemChosen = itemsList[this.getRandomInt(itemsList.length)]
+        let colorChosen = colorList[this.getRandomInt(colorList.length)]
 
         let beerItem: I.Item = {
             name: BEER_NAME,
