@@ -79,6 +79,8 @@ tracks/0/keys = {
 
 [sub_resource type="DynamicFont" id=5]
 size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 8 )
 
 [node name="Player" type="Node2D" groups=[
