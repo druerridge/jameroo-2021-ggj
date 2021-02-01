@@ -177,7 +177,7 @@ func load_markings(in_room_data):
 	for x_index in range(0, in_room_data.room.grid.size()):
 		for y_index in range(0, in_room_data.room.grid[x_index].size()):
 			var cell = in_room_data.room.grid[x_index][y_index]
-			var dig_grid_position = Vector2(y_index, x_index)
+			var dig_grid_position = Vector2(x_index, y_index)
 			spawn_marking_dig(cell.marking.color, cell.marking.shape, dig_grid_position)
 
 func valid_dig_pos(dig_pos:Vector2):
