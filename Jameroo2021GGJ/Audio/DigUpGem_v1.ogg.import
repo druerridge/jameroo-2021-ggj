@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/DigUpGem_v1.ogg-e17cf0b4238db138d36c1c3a4fa82186.oggstr"
+
+[deps]
+
+source_file="res://Audio/DigUpGem_v1.ogg"
+dest_files=[ "res://.import/DigUpGem_v1.ogg-e17cf0b4238db138d36c1c3a4fa82186.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
