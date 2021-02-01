@@ -1,7 +1,7 @@
 extends Node
 
 var LEVEL_LENGTH_SECONDS = 180
-var VISIBLE_LIGHT_MINIMUM_SCALE = Vector2(0.2, 0.2)
+var VISIBLE_LIGHT_MINIMUM_SCALE = Vector2(0.4, 0.4)
 
 var elapsedTimeSeconds = 0
 var isFirstFrame = true
