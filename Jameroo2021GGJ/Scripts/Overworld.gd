@@ -146,11 +146,11 @@ func process_actor_spawn_conditions():
 			obj.call_deferred("free")
 
 func dig_to_map(dig_grid_position: Vector2):
-	var dig_grid_origin_map_pos = Vector2(4, 4)
+	var dig_grid_origin_map_pos = Vector2(18, 6)
 	return dig_grid_position + dig_grid_origin_map_pos
 
 func map_to_dig(map_grid_position: Vector2):
-	var dig_grid_origin = Vector2(4, 4)
+	var dig_grid_origin = Vector2(18, 6)
 	return map_grid_position - dig_grid_origin
 
 func dig_to_world(dig_grid_position: Vector2):
