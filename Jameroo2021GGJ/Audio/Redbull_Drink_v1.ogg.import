@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Redbull_Drink_v1.ogg-4751b0d4948fa71cf106ef14071a4512.oggstr"
+
+[deps]
+
+source_file="res://Audio/Redbull_Drink_v1.ogg"
+dest_files=[ "res://.import/Redbull_Drink_v1.ogg-4751b0d4948fa71cf106ef14071a4512.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
