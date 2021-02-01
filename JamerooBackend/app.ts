@@ -59,6 +59,31 @@ app.get('/roomState/:roomId', (req: any, res: any) => {
     res.status(200);
 });
 
+function getUnfinishedRoom(): I.Room {
+    var roomIds: Array<string> = Object.keys(roomByRoomId);
+    for (let i: number = 0; i < roomIds.length; ++i) {
+        let room: I.Room = roomByRoomId[roomIds[i]];
+        if (room.finishedBy != null) {
+            return room;
+        }
+    }
+    return null;
+}
+
+app.get('/roomState/', (req: any, res: any) => {
+    let roomId: string = generateRoomId();
+    let room: I.Room = getUnfinishedRoom();
+    if (room == null) {
+        room = PresetData.generateNewRoom(roomId, 10, 10);
+    }
+    let getRoomResponse: I.GetRoomResponse = {
+        room: room
+    };
+
+    res.json(getRoomResponse);
+    res.status(200);
+});
+
 app.post('/roomState/:roomId', (req: any, res: any) => {
     let roomId: string = req.params.roomId;
 

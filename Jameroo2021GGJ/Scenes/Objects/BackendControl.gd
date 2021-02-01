@@ -3,9 +3,9 @@ extends Control
 signal room_data_loaded(room_data)
 
 var get_room_base_url = "UNDEFINED YO"
-var base_url = "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
-#var base_url = "http://localhost:10999/" # for testing with a local backend
-var room_id = "room33"
+#var base_url = "http://ggj2021.maestrosgame.com/" # for testing w/ remote backend (default)
+var base_url = "http://localhost:10999/" # for testing with a local backend
+var room_id = ""
 var room_data
 
 func _ready():
@@ -56,7 +56,7 @@ func initialize():
 	print("get_room_base_url: " + get_room_base_url)
 
 func get_share_url():
-	return base_url + "?id=" + room_id
+	return base_url + "?id=" + get_node("/root/Globals").room_id
 
 func get_room(in_room_id):
 	var url = get_room_base_url + in_room_id
@@ -107,6 +107,9 @@ func _on_get_room_completed(result, response_code, headers, body):
 	var jsonString = body.get_string_from_utf8();
 	var json := JSON.parse(jsonString)
 	room_data = json.result
+	if (room_data.room.get("roomId")):
+		room_id = room_data.room.roomId
+		get_node("/root/Globals").room_id = room_id
 	print(json.result)
 	$RoomDataRichTextLabel.text = jsonString
 	emit_signal("room_data_loaded", room_data)

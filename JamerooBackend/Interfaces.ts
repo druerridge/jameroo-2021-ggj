@@ -33,6 +33,9 @@ export interface Cell {
 export interface Room {
     grid: Array<Array<Cell>>;
     depositBox: Array<Item>;
+    finishedBy: string;
+    attempts: number;
+    roomId: string;
 }
 
 export interface CreateRoomStateResponse {
