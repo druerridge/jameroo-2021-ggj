@@ -35,7 +35,6 @@ config/icon="res://icon.png"
 GameData="*res://Scripts/Globals/GameData.gd"
 InputSystem="*res://Scripts/Globals/InputSystem.gd"
 UI="*res://Scenes/UI.tscn"
-Globals="*res://Demo/Globals.gd"
 
 [display]
 

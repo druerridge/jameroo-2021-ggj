@@ -149,7 +149,6 @@ format = 1
 tile_data = PoolIntArray( 65554, 10, 0, 131090, 8, 0, 262167, 10, 0, 393232, 10, 0, 458768, 9, 0, 524304, 8, 0, 720921, 10, 0 )
 
 [node name="ShadeLight2D" type="Light2D" parent="."]
-visible = false
 light_mask = 0
 scale = Vector2( 100, 100 )
 z_index = 100
