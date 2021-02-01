@@ -118,8 +118,16 @@ func inv_query(item_name: String, item_amount: int) -> bool:
 				total += inv_amount_list[i]
 	return total >= item_amount
 
+func get_inv_index(item_name: String) -> int:
+	var total: int = 0
+	for i in range(inv_struct_list.size()):
+		if inv_struct_list[i] != null:
+			if inv_struct_list[i].i_name == item_name:
+				return i
+	return -1
 
 func use_item_at_slot(index: int):
+	print(inv_amount_list[index])
 	if inv_amount_list[index] > 0:
 		inv_struct_list[index].i_use(interactor)
 		if inv_struct_list[index].i_consumable:

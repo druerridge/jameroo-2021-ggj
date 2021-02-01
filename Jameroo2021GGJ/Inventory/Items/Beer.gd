@@ -9,7 +9,7 @@ func _init(color):
 	self.i_color = color
 
 func i_pickup(player):
-	player.drunkTimer = 10
+	player.drunkTimer = 5
 	InputSystem.randomize_movement_inputs()
 	
 func i_use(player):

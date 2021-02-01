@@ -23,7 +23,7 @@ func _on_request_completed(result, response_code, headers, body):
 	var jsonString = body.get_string_from_utf8();
 	var json = JSON.parse(jsonString)
 	roomData = json.result
-	print(json.result)	
+	#print(json.result)	
 	$RoomDataRichTextLabel.text = jsonString
 
 

@@ -59,9 +59,7 @@ func activate_object():
 
 func _on_item_interacted(sender, item):
 	if item.i_name == "Shovel":
-		print("WE ARE TRYING TO ADD A SHOVEL")
 		if $ShovelInvComponent.inv_query(item.i_name, 1) && $ShovelInvComponent.add_to_inventory(item, 1):
-			print("WE SUCCESSFULY ADDED A SHOVEL")
 			sender.queue_free()
 			overworld.remove_from_active(sender)
 	elif $InventoryComponent.add_to_inventory(item, 1):
@@ -92,3 +90,11 @@ func set_shovel_color(color):
 		obj_color = CELL_COLORS.BLUE
 	if color == CELL_COLORS.keys()[3]:
 		obj_color = CELL_COLORS.PURPLE
+
+func use_a_key_return_sucess():
+	var index = $InventoryComponent.get_inv_index("Key")
+	var has_more_than_one = $InventoryComponent.inv_query("Key", 1)
+	if index > -1 && has_more_than_one:
+		$InventoryComponent.use_item_at_slot(index)
+		return true
+	return false

@@ -1,6 +1,6 @@
 extends Node
 
-var LEVEL_LENGTH_SECONDS = 30
+var LEVEL_LENGTH_SECONDS = 500
 var VISIBLE_LIGHT_MINIMUM_SCALE = Vector2(0.2, 0.2)
 
 var elapsedTimeSeconds = 0
@@ -36,7 +36,7 @@ func end_game():
 	print("ending game")
 	var scene = get_parent()
 	var overworld = scene.get_node("InteractiveTerrain")
-	print("origin room data: " + str(overworld.origin_room_data))
+	#"origin room data: " + str(overworld.origin_room_data))
 	var backend_control = scene.get_node("BackendControl")
 	backend_control.update_room(backend_control.room_id, overworld.origin_room_data)
 

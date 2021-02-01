@@ -18,7 +18,7 @@ func _on_Button_pressed():
 func _on_request_completed(result, response_code, headers, body):
 	var json = JSON.parse(body.get_string_from_utf8())
 	self.text = "Done"
-	print(json.result)
+	#print(json.result)
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

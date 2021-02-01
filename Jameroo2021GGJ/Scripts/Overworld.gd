@@ -181,7 +181,6 @@ func attempt_dig(player):
 		return
 	var cell = room_data.room.grid[dig_pos.x][dig_pos.y]
 	var color = player.CELL_COLORS.keys()[player.obj_color].to_lower()
-	print(cell.digResultByColor[color])
 	var item = cell.digResultByColor[color].items.pop_back()
 	if (item != null):
 		var item_name = item.name
