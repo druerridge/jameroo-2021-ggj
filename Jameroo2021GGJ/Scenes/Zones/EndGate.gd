@@ -5,14 +5,14 @@ var min_distance
 var gameover_signal_sent
 var keys_used
 var timer
-
-signal gameover()
+var game_timer
 
 func _ready():
 	min_distance = 120
 	gameover_signal_sent = false
 	keys_used = 0
 	timer = 0
+	game_timer = get_tree().get_nodes_in_group("gameTimer")[0]
 
 func _process(delta):
 	if !player:
@@ -27,7 +27,8 @@ func _process(delta):
 			timer = 2
 		if keys_used >= 2:
 			gameover_signal_sent = true
-			emit_signal("gameover")
+			game_timer.end_game()
+
 
 func is_close_to_player():
 	if gameover_signal_sent == true:

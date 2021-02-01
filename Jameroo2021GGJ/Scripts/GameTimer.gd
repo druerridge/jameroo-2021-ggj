@@ -1,6 +1,6 @@
 extends Node
 
-var LEVEL_LENGTH_SECONDS = 500
+var LEVEL_LENGTH_SECONDS = 30
 var VISIBLE_LIGHT_MINIMUM_SCALE = Vector2(0.2, 0.2)
 
 var elapsedTimeSeconds = 0
