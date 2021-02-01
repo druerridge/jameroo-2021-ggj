@@ -93,6 +93,7 @@ func _on_update_room_completed(result, response_code, headers, body):
 	var jsonString = body.get_string_from_utf8()
 	print("successfully updated room. response payload:" +  jsonString)
 	$RoomDataRichTextLabel.text = "Room successfully updated. Response was: " + jsonString
+	get_tree().change_scene("res://Scenes/Zones/EndScene.tscn")
 
 func _on_get_room_completed(result, response_code, headers, body):
 	if (result != 0):
