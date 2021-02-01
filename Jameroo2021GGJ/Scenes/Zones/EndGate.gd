@@ -8,7 +8,7 @@ var timer
 var game_timer
 
 func _ready():
-	min_distance = 120
+	min_distance = 160
 	gameover_signal_sent = false
 	keys_used = 0
 	timer = 0
@@ -20,14 +20,14 @@ func _process(delta):
 		return
 	if timer > 0:
 		timer -= delta
-	if is_close_to_player() && timer <= 0:
+	if is_close_to_player() && timer >= 0:
 		if player.use_a_key_return_sucess():
 			keys_used += 1
 			$Position2D/AnimatedSprite.animation = str(keys_used)
 			timer = 2
 		if keys_used >= 2:
 			gameover_signal_sent = true
-			game_timer.end_game()
+			game_timer.end_game(true)
 
 
 func is_close_to_player():

@@ -5,6 +5,8 @@ extends Node
 # var a = 2
 # var b = "text"
 var room_id = ""
+var won = false
+var attempts
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -5,6 +5,7 @@ var VISIBLE_LIGHT_MINIMUM_SCALE = Vector2(0.4, 0.4)
 
 var elapsedTimeSeconds = 0
 var isFirstFrame = true
+var ended
 
 var backgroundMusic
 var visibleLight: Node2D
@@ -12,7 +13,7 @@ var visibleLightInitialScale: Vector2
 
 func _process(delta):
 	if Input.is_action_pressed("end_game"):
-		end_game()
+		end_game(false)
 	
 	if isFirstFrame:
 		initialize()
@@ -21,7 +22,7 @@ func _process(delta):
 	elapsedTimeSeconds += delta
 	
 	if elapsedTimeSeconds > LEVEL_LENGTH_SECONDS:
-		end_game()
+		end_game(false)
 	else:
 		layer_background_music()
 		dim_lighting()
@@ -32,14 +33,22 @@ func initialize():
 	visibleLight = get_parent().get_node("InteractiveTerrain").get_node("Player").get_node("Pivot").get_node("VisibleLight2D")
 	visibleLightInitialScale = visibleLight.scale
 
-func end_game():
+func end_game(won):
+	if (ended == true):
+		return
+	ended = true
+	
 	print("ending game")
 	var scene = get_parent()
 	var overworld = scene.get_node("InteractiveTerrain")
-	overworld.origin_room_data.finishedBy = "cats"
+	
 	print("origin room data: " + str(overworld.origin_room_data))
-	#"origin room data: " + str(overworld.origin_room_data))
 	var backend_control = scene.get_node("BackendControl")
+	get_node("/root/Globals").won = won
+	overworld.origin_room_data.room.attempts = overworld.origin_room_data.room.attempts + 1
+	get_node("/root/Globals").attempts = overworld.origin_room_data.room.attempts
+	if (won):
+		overworld.origin_room_data.room.finishedBy = "cats"
 	backend_control.update_room(backend_control.room_id, overworld.origin_room_data)
 
 func layer_background_music():

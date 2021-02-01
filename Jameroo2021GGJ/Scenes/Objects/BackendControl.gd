@@ -11,7 +11,8 @@ var room_data
 func _ready():
 	initialize()
 	print("ready")
-	get_room(room_id)
+	if (get_parent().get("end_scene") == null):
+		get_room(room_id)
 
 func js_initialize():
 	if OS.has_feature('JavaScript'):
@@ -97,11 +98,11 @@ func _on_update_room_completed(result, response_code, headers, body):
 
 func _on_get_room_completed(result, response_code, headers, body):
 	if (result != 0):
-		print("Unsuccessful GET request. result: " + result)
+		print("Unsuccessful GET request. result: " + str(result))
 		$RoomDataRichTextLabel.text = "error making request to server"
 	
 	if (response_code > 299 || response_code < 200):
-		print("error on GET http request complete. response_code: " + response_code)
+		print("error on GET http request complete. response_code: " + str(response_code))
 		$RoomDataRichTextLabel.text = "error on http request complete"
 		
 	var jsonString = body.get_string_from_utf8();
@@ -112,7 +113,11 @@ func _on_get_room_completed(result, response_code, headers, body):
 		get_node("/root/Globals").room_id = room_id
 	print(json.result)
 	$RoomDataRichTextLabel.text = jsonString
-	emit_signal("room_data_loaded", room_data)
+	if (room_data.room.finishedBy != null && room_data.room.finishedBy != ""):
+		get_parent().get_node("InteractiveTerrain").origin_room_data = room_data
+		get_parent().get_node("GameTimer").end_game(true)
+	else:
+		emit_signal("room_data_loaded", room_data)
 
 func _on_GetRoomButton_pressed():
 	get_room($RoomIdTextEdit.text);

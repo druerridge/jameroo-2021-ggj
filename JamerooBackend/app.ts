@@ -28,10 +28,7 @@ let jsonFormatter = function (tokens: any, req: any, res: any) {
 app.use(morgan(jsonFormatter, { stream: logger.stream }));
 app.use(serveStatic(path.join(__dirname, 'public')));
 
-let roomByRoomId: { [key: string]: I.Room } = {
-    room22: PresetData.generateRoom22(),
-    room33: PresetData.generateRoom33()
-}
+let roomByRoomId: { [key: string]: I.Room } = {}
 
 function generateRoomId(): string {
     let length: number = 6;
@@ -63,7 +60,7 @@ function getUnfinishedRoom(): I.Room {
     var roomIds: Array<string> = Object.keys(roomByRoomId);
     for (let i: number = 0; i < roomIds.length; ++i) {
         let room: I.Room = roomByRoomId[roomIds[i]];
-        if (room.finishedBy != null) {
+        if (room.finishedBy == null) {
             return room;
         }
     }
@@ -79,7 +76,7 @@ app.get('/roomState/', (req: any, res: any) => {
     let getRoomResponse: I.GetRoomResponse = {
         room: room
     };
-
+    roomByRoomId[room.roomId] = room;
     res.json(getRoomResponse);
     res.status(200);
 });
@@ -87,11 +84,19 @@ app.get('/roomState/', (req: any, res: any) => {
 app.post('/roomState/:roomId', (req: any, res: any) => {
     let roomId: string = req.params.roomId;
 
-    roomByRoomId[roomId] = req.body.room;
+    let existingRoom: I.Room = roomByRoomId[roomId];
 
     let createRoomStateResponse: I.CreateRoomStateResponse = {
         roomId: roomId
     };
+
+    if (existingRoom != null && existingRoom.finishedBy != null) {
+        res.json(createRoomStateResponse);
+        res.status(200);
+        return;
+    }
+
+    roomByRoomId[roomId] = req.body.room;
 
     res.json(createRoomStateResponse);
     res.status(200);
