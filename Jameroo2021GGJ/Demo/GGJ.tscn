@@ -150,6 +150,7 @@ tile_data = PoolIntArray( 65554, 10, 0, 131090, 8, 0, 262167, 10, 0, 393232, 10,
 
 [node name="ShadeLight2D" type="Light2D" parent="."]
 light_mask = 0
+position = Vector2( -1, 0 )
 scale = Vector2( 100, 100 )
 z_index = 100
 texture = ExtResource( 3 )

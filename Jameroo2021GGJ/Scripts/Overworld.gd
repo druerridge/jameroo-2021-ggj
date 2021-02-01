@@ -10,6 +10,18 @@ var room_data
 
 const marking_template = preload("res://Scenes/Objects/Marking.tscn")
 
+var shovel = load("res://Scenes/Objects/Shovel.tscn")
+var key = load("res://Scenes/Objects/Key.tscn")
+var beer = load("res://Scenes/Objects/Beer.tscn")
+var redbull = load("res://Scenes/Objects/Beer.tscn")
+
+var nameToItem = {
+	"shovel": shovel,
+	"key": key,
+	"beer": beer,
+	"redbull": redbull
+}
+
 func _ready():
 	rng.randomize()
 	process_actor_spawn_conditions()
@@ -185,7 +197,8 @@ func attempt_dig(player):
 	if (item != null):
 		var item_name = item.name
 		print("Found item: " + item_name)
-		var loadedItem = load("res://Scenes/Objects/" + item_name + ".tscn")
+#		var loadedItem = load("res://Scenes/Objects/" + item_name + ".tscn")
+		var loadedItem = nameToItem[item_name]
 		if !loadedItem:
 			return
 		var newItem = loadedItem.instance()
