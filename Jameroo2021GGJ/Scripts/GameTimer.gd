@@ -11,6 +11,9 @@ var visibleLight: Node2D
 var visibleLightInitialScale: Vector2
 
 func _process(delta):
+	if Input.is_action_pressed("end_game"):
+		end_game()
+	
 	if isFirstFrame:
 		initialize()
 		isFirstFrame = false
@@ -22,7 +25,7 @@ func _process(delta):
 	else:
 		layer_background_music()
 		dim_lighting()
-
+		
 func initialize():
 	# i'm sure there's a better way to do this
 	backgroundMusic = get_parent().get_node("BackgroundMusic")
@@ -30,7 +33,12 @@ func initialize():
 	visibleLightInitialScale = visibleLight.scale
 
 func end_game():
-	pass
+	print("ending game")
+	var scene = get_parent()
+	var overworld = scene.get_node("InteractiveTerrain")
+	print("origin room data: " + str(overworld.origin_room_data))
+	var backend_control = scene.get_node("BackendControl")
+	backend_control.update_room(backend_control.room_id, overworld.origin_room_data)
 
 func layer_background_music():
 	var oneThirdTime = LEVEL_LENGTH_SECONDS / 3

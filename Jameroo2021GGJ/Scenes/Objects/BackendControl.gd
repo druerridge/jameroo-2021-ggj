@@ -55,6 +55,9 @@ func initialize():
 	print("base_url: " + base_url)
 	print("get_room_base_url: " + get_room_base_url)
 
+func get_share_url():
+	return base_url + "?id=" + room_id
+
 func get_room(in_room_id):
 	var url = get_room_base_url + in_room_id
 	var http_request = HTTPRequest.new()
@@ -90,6 +93,7 @@ func _on_update_room_completed(result, response_code, headers, body):
 	var jsonString = body.get_string_from_utf8()
 	print("successfully updated room. response payload:" +  jsonString)
 	$RoomDataRichTextLabel.text = "Room successfully updated. Response was: " + jsonString
+	get_tree().change_scene("res://Scenes/Zones/EndScene.tscn")
 
 func _on_get_room_completed(result, response_code, headers, body):
 	if (result != 0):
